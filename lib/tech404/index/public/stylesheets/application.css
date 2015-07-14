@@ -53,11 +53,11 @@ a:active {
 .sidebar ul.channels {
   list-style: none;
 }
-.sidebar ul.channels li.channels {
+.sidebar ul.channels li.channel {
   color: #ab9ba9;
+  margin-bottom: 0;
 }
 .sidebar ul.channels li.channel:before {
-  color: #ab9ba9;
   content: '#'
 }
 .sidebar ul.channels li.channel a:link {
