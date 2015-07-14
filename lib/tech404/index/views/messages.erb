@@ -1,4 +1,14 @@
-<h2 class="channel-name">#<%= @channel.name %></h2>
+<div class="header">
+  <h2 class="channel-name">#<%= @channel.name %></h2>
+
+  <a class="previous-day" href="<%= channel_path(@channel, date - 1) %>">
+    ← <%= (date - 1).strftime('%Y-%m-%d') %>
+  </a>
+
+  <a class="next-day" href="<%= channel_path(@channel, date + 1) %>">
+    <%= (date + 1).strftime('%Y-%m-%d') %> →
+  </a>
+</div>
 
 <div class="messages">
   <% @messages.chunk(&:user).each do |user, paragraph| %>

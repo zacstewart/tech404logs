@@ -19,6 +19,14 @@ module Tech404
           timestamp: Time.at(Float(message.fetch('ts')))
         ).save
       end
+
+      def self.ascending
+        all(order: [:timestamp.asc])
+      end
+
+      def self.on_date(date)
+        all(timestamp: (date...date + 1))
+      end
     end
   end
 end
