@@ -1,0 +1,23 @@
+<h2 class="channel-name">#<%= @channel.name %></h2>
+
+<div class="messages">
+  <% @messages.chunk(&:user).each do |user, paragraph| %>
+    <div class="message">
+      <img src="<%= user.image %>" class="avatar">
+      <div class="message-header">
+        <span class="user-name"><%= user.real_name %></span>
+        <time class="timestamp">
+          <%= paragraph.first.timestamp.strftime('%-H:%M') %>
+        </time>
+      </div>
+      <div class="contents">
+        <div class="message-content">
+          <p><%= paragraph.first.text %></p>
+          <% paragraph.drop(1).each do |message| %>
+            <p><%= message.text %></p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

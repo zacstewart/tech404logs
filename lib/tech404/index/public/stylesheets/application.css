@@ -1,0 +1,93 @@
+html {
+  font-size: 100%;
+  height: 100%;
+}
+body {
+  -webkit-font-smoothing: antialiased;
+  font-family: "Helvetica Neue",Helvetica,"Segoe UI",Tahoma,Arial,sans-serif;
+  font-size: 16px;
+  height: 100%;
+  text-rendering: optimizelegibility;
+}
+.page {
+  height: 100%;
+}
+.sidebar {
+  background-color: #1a1919;
+  color: #fff;
+  font-size: 16px;
+  height: 100%;
+  padding-left: 1rem;
+}
+.sidebar .header {
+  font-size: 1rem;
+  font-weight: 900;
+  margin-bottom: 16px;
+  margin-top: 16px;
+}
+.sidebar .header h1 {
+  font-family: Lato, appleLogo, sans-serif;
+  font-size: 1.125rem;
+  font-weight: 900;
+  height: 1.375rem;
+  line-height: 1.375rem;
+  white-space: nowrap;
+}
+.sidebar ul.channels {
+  list-style: none;
+}
+.sidebar ul.channels li.channels {
+  color: #ab9ba9;
+}
+.sidebar ul.channels li.channel::before {
+  color: #ab9ba9;
+  content: '#'
+}
+.sidebar ul.channels li.channel a:link {
+  color: #fff;
+}
+.sidebar ul.channels li.channel a:active {
+  color: #fff;
+}
+.sidebar ul.channels li.channel a:hover {
+  color: #fff;
+}
+.sidebar ul.channels li.channel a:visited {
+  color: #fff;
+}
+.sidebar ul.channels li.channel a:focus {
+  color: #fff;
+}
+.content .messages .message:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.content .messages .message .avatar {
+  border-radius: .2rem;
+  float: left;
+  width: 36px;
+  height: 36px;
+  margin-right: 12px;
+}
+.content .messages .message .contents {
+  float: left;
+}
+.content .messages .message .message-header .user-name {
+  font-weight: bold;
+}
+.content .messages .message .message-header .timestamp {
+  color: #babbbf;
+  font-size: .75rem;
+}
+.content .messages .message .message-content {
+  color: #3d3c40;
+  font-size: .9375rem;
+  line-height: 1.375rem
+}
+
+.content .messages .message .message-content p {
+  height: 1.375rem;
+  margin-bottom: 0;
+  padding-top: 4px;
+}

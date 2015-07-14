@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Tech404 Search Index</title>
+    <link rel="stylesheet" href="/stylesheets/normalize.css">
+    <link rel="stylesheet" href="/stylesheets/skeleton.css">
+    <link rel="stylesheet" href="/stylesheets/application.css">
+    <link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+  </head>
+  <body>
+    <div class="page row">
+      <div class="sidebar two columns">
+        <div class="header">
+          <h1>tech404</h1>
+        </div>
+        <ul class="channels">
+          <% channels.each do |channel| %>
+            <li class="channel">
+              <a href="<%= channel_path(channel) %>">
+                <%= channel.name %>
+              </a>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+      <div class="content ten columns">
+        <%= yield %>
+      </div>
+    </div>
+  </body>
+</html>

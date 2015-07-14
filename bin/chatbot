@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+$LOAD_PATH.unshift File.join(File.dirname(File.dirname(__FILE__)), 'lib')
+require 'tech404/index'
+
+Tech404::Index::Connection.new.run
