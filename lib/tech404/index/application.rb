@@ -27,7 +27,7 @@ module Tech404
         end
 
         def channels
-          Channel.all
+          Channel.indexing
         end
 
         def channel_path(channel_or_name, date = nil)
