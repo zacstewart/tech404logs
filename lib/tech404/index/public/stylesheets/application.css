@@ -140,7 +140,7 @@ a:active {
 }
 
 .content .messages .message .message-content p {
-  height: 1.375rem;
+  line-height: 1.375rem;
   margin-bottom: 0;
   padding-top: 4px;
 }
