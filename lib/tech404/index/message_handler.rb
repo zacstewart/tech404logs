@@ -14,6 +14,8 @@ module Tech404
         case type
         when 'message'
           Message.store(message)
+        when 'channel_join', 'channel_leave', 'team_join', 'user_change'
+          User.store(message.fetch('user'))
         end
       end
 

@@ -12,12 +12,16 @@ module Tech404
       belongs_to :user
 
       def self.store(message)
-        new(
-          channel_id: message.fetch('channel'),
-          user_id: message.fetch('user'),
-          text: message.fetch('text'),
-          timestamp: Time.at(Float(message.fetch('ts')))
-        ).save
+        transaction do
+          User.store(message.fetch('user'))
+
+          create(
+            channel_id: message.fetch('channel'),
+            user_id: message.fetch('user'),
+            text: message.fetch('text'),
+            timestamp: Time.at(Float(message.fetch('ts')))
+          )
+        end
       end
 
       def self.ascending

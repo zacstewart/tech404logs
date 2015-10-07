@@ -15,6 +15,15 @@ module Tech404
           record.image = user.fetch('profile').fetch('image_48')
         end.save
       end
+
+      def self.store(user_or_id)
+        case user_or_id
+        when Hash
+          self.create_or_update(user_or_id)
+        when String
+          self.first_or_create(id: user_or_id)
+        end
+      end
     end
   end
 end

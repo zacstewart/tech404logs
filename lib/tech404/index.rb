@@ -71,7 +71,7 @@ module Tech404
 
       def sync_users
         rtm.fetch('users').each do |user|
-          User.create_or_update(user)
+          User.store(user)
         end
       end
     end
