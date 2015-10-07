@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 $LOAD_PATH.unshift File.join(File.dirname(File.dirname(__FILE__)), 'lib')
+$stdout.sync = true
 require 'tech404/index'
 
 Tech404::Index::Connection.new.run
