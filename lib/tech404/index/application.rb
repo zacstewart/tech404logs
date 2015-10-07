@@ -3,6 +3,8 @@ require 'date'
 module Tech404
   module Index
     class Application < Sinatra::Base
+      MENTION_PATTERN = /<@(?<id>U[A-Z0-9]+)(?:\|(?<name>[^>]+))?>/
+
       get '/' do
         @channel = Channel.first(name: 'general')
         @messages = @channel.messages.on_date(date).ascending
@@ -41,6 +43,14 @@ module Tech404
             "/#{name}/#{date.strftime('%Y-%m-%d')}"
           else
             "/#{name}"
+          end
+        end
+
+        def format_mentions(text)
+          puts text
+          text.gsub(MENTION_PATTERN) do
+            name = $~[:name] || User.get($~[:id]).name
+            "@#{name}"
           end
         end
       end

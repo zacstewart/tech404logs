@@ -22,9 +22,9 @@
       </div>
       <div class="contents">
         <div class="message-content">
-          <p><%= paragraph.first.text %></p>
+          <p><%= format_mentions paragraph.first.text %></p>
           <% paragraph.drop(1).each do |message| %>
-            <p><%= message.text %></p>
+            <p><%= format_mentions message.text %></p>
           <% end %>
         </div>
       </div>
