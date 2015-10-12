@@ -44,8 +44,10 @@ module Tech404
           end
         end
 
-        def format_mentions(text)
-          UserMentionFilter.apply(text)
+        def format_message(text)
+          text = UserMentionFilter.apply(text)
+          text = ChannelMentionFilter.apply(text)
+          text
         end
       end
     end
