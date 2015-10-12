@@ -7,6 +7,7 @@ require 'tech404/index/connection'
 require 'tech404/index/message'
 require 'tech404/index/message_handler'
 require 'tech404/index/user'
+require 'tech404/index/user_mention_filter'
 require 'tech404/index/version'
 
 DataMapper::Logger.new($stdout, :debug)
