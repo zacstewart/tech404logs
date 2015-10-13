@@ -115,6 +115,11 @@ a:active {
   display: table;
   clear: both;
 }
+
+.content .messages .message {
+  margin-bottom: 1rem;
+}
+
 .content .messages .message .avatar {
   border-radius: .2rem;
   float: left;
