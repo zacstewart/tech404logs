@@ -101,6 +101,7 @@ a:active {
   font-weight: 900;
   height: 1.375rem;
   line-height: 1.375rem;
+  letter-spacing: .01rem;
   margin-bottom: 1rem;
   white-space: nowrap;
 }
