@@ -12,18 +12,7 @@ body {
 a {
   color: #2a80b9
 }
-a:link {
-  color: #2a80b9
-}
-a:visited {
-  color: #2a80b9
-}
-a:hover {
-  color: #2a80b9
-}
-a:active {
-  color: #2a80b9
-}
+
 .page {
   height: 100%;
 }
@@ -49,6 +38,7 @@ a:active {
   line-height: 1.375rem;
   margin-bottom: 1rem;
   white-space: nowrap;
+  letter-spacing: .01rem;
 }
 .sidebar ul.channels {
   list-style: none;
