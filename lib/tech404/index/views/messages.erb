@@ -15,7 +15,7 @@
     <div class="message">
       <img src="<%= user.image %>" class="avatar">
       <div class="message-header">
-        <span class="user-name"><%= user.real_name %></span>
+        <span class="user-name"><%= user_name user %></span>
         <time class="timestamp">
           <%= paragraph.first.timestamp.strftime('%-H:%M') %>
         </time>

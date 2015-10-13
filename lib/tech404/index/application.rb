@@ -49,6 +49,10 @@ module Tech404
           text = ChannelMentionFilter.apply(text)
           text
         end
+
+        def user_name(user)
+          user.real_name || user.name
+        end
       end
     end
   end
