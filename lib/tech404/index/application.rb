@@ -51,7 +51,9 @@ module Tech404
         end
 
         def user_name(user)
-          user.real_name || user.name
+          name = user.real_name.to_s
+          name = user.name if name.empty?
+          name
         end
       end
     end
