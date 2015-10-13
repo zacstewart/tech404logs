@@ -60,21 +60,15 @@ a:active {
 .sidebar ul.channels li.channel:before {
   content: '#'
 }
-.sidebar ul.channels li.channel a:link {
+.sidebar ul.channels li.channel a {
   color: #fff;
+  text-decoration: none;
 }
-.sidebar ul.channels li.channel a:active {
-  color: #fff;
-}
+
 .sidebar ul.channels li.channel a:hover {
-  color: #fff;
+  color: rgba(255, 255, 255, 0.6);
 }
-.sidebar ul.channels li.channel a:visited {
-  color: #fff;
-}
-.sidebar ul.channels li.channel a:focus {
-  color: #fff;
-}
+
 .content {
   height: 100%;
   overflow: auto;
@@ -89,6 +83,15 @@ a:active {
   display: table;
   clear: both;
 }
+
+.content .header a {
+  text-decoration: none;
+}
+
+.content .header a:hover {
+  text-decoration: underline;
+}
+
 .content .header .previous-day {
   float: left;
 }
