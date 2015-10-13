@@ -79,7 +79,7 @@ a {
 }
 
 .content .header a:hover {
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 .content .header .previous-day {
