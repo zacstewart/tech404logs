@@ -13,7 +13,7 @@ environment ENV['RACK_ENV'] || 'development'
 before_fork do
   Tech404::Index.preboot
 
-  if ENV['RACK_ENV'] == 'production'
+  if Tech404::Index.production?
     fork do
       Process.exec('bin/chatbot')
     end

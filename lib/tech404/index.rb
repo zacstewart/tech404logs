@@ -1,4 +1,5 @@
 require 'data_mapper'
+require 'le'
 require 'logger'
 require 'sinatra/base'
 require 'tech404/index/application'
@@ -15,13 +16,21 @@ require 'tech404/index/version'
 module Tech404
   module Index
     def self.logger
-      @logger ||= Logger.new(STDOUT)
+      @logger ||= if production?
+        Le.new(ENV['LOGENTRIES_TOKEN'], debug: true, local: true)
+      else
+         Logger.new(STDOUT)
+      end
     end
 
     def self.preboot
-      DataMapper::Logger.new($stdout, :debug)
+      DataMapper::Logger.new(STDOUT, :debug)
       DataMapper.setup(:default, ENV['DATABASE_URL'])
       DataMapper.finalize
+    end
+
+    def self.production?
+      ENV['RACK_ENV'] == 'production'
     end
   end
 end
