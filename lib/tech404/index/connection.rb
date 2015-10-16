@@ -1,6 +1,7 @@
 require 'eventmachine'
 require 'faye/websocket'
 require 'slack/api'
+require 'thread'
 
 module Tech404
   module Index
@@ -55,14 +56,18 @@ module Tech404
       end
 
       def sync_channels
-        rtm.fetch('channels').each do |channel|
-          Channel.create_or_update(channel)
+        Thread.new do
+          rtm.fetch('channels').each do |channel|
+            Channel.create_or_update(channel)
+          end
         end
       end
 
       def sync_users
-        rtm.fetch('users').each do |user|
-          User.store(user)
+        Thread.new do
+          rtm.fetch('users').each do |user|
+            User.store(user)
+          end
         end
       end
     end
