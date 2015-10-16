@@ -1,9 +1,9 @@
 require 'test_helper'
 
-describe Tech404::Index::ChannelMentionFilter do
+describe ChannelMentionFilter do
   let(:channels) { mock }
   let(:general) { mock(name: 'general') }
-  subject { Tech404::Index::ChannelMentionFilter.new(text, channel_repo: channels) }
+  subject { ChannelMentionFilter.new(text, channel_repo: channels) }
 
   describe '#apply' do
     describe 'when the mention includes a name' do

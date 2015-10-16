@@ -4,3 +4,5 @@ require 'tech404/index'
 require 'minitest/spec'
 require 'mocha/mini_test'
 require 'minitest/autorun'
+
+include Tech404::Index
