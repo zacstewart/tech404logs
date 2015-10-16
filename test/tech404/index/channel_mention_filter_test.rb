@@ -17,7 +17,7 @@ describe ChannelMentionFilter do
     describe 'when the mention does not include a name' do
       let(:text) { 'Go back to <#C1234>' }
 
-      it 'finds the channel by id to get the name' do
+      it 'finds the channel by id to get its name' do
         channels.expects(:get).with('C1234').returns(general)
         subject.apply.must_equal('Go back to #general')
       end
