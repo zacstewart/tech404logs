@@ -64,7 +64,7 @@ GEM
       dm-core (~> 1.2.0)
     do_postgres (0.10.16)
       data_objects (= 0.10.16)
-    eventmachine (1.0.7)
+    eventmachine (1.0.8)
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
     fastercsv (1.5.5)
@@ -73,7 +73,10 @@ GEM
       websocket-driver (>= 0.5.1)
     json (1.8.3)
     json_pure (1.8.2)
+    metaclass (0.0.4)
     minitest (5.7.0)
+    mocha (1.1.0)
+      metaclass (~> 0.0.1)
     multi_json (1.11.2)
     multipart-post (2.0.0)
     rack (1.6.4)
@@ -87,7 +90,7 @@ GEM
     stringex (1.5.1)
     tilt (1.4.1)
     uuidtools (2.1.5)
-    websocket-driver (0.6.1)
+    websocket-driver (0.6.2)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
 
@@ -97,8 +100,9 @@ PLATFORMS
 DEPENDENCIES
   bundler (~> 1.10)
   minitest
+  mocha
   rake (~> 10.0)
   tech404-index!
 
 BUNDLED WITH
-   1.10.5
+   1.10.6
