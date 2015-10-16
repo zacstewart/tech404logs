@@ -47,6 +47,7 @@ module Tech404
         def format_message(text)
           text = UserMentionFilter.apply(text)
           text = ChannelMentionFilter.apply(text)
+          text = MessageFormatFilter.apply(text)
           text
         end
 
