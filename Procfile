@@ -1,2 +1,2 @@
-web: rackup -p $PORT
 bot: bin/chatbot
+web: rackup -p $PORT
