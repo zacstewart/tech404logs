@@ -7,6 +7,7 @@ PATH
       faraday
       faye-websocket (~> 0.10.0)
       multi_json (~> 1.11.2)
+      puma
       sinatra
 
 GEM
@@ -79,6 +80,7 @@ GEM
       metaclass (~> 0.0.1)
     multi_json (1.11.2)
     multipart-post (2.0.0)
+    puma (2.13.4)
     rack (1.6.4)
     rack-protection (1.5.3)
       rack

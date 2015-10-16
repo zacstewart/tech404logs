@@ -12,15 +12,16 @@ require 'tech404/index/user'
 require 'tech404/index/user_mention_filter'
 require 'tech404/index/version'
 
-DataMapper::Logger.new($stdout, :debug)
-DataMapper.setup(:default, ENV['DATABASE_URL'])
-DataMapper.finalize
-DataMapper.auto_upgrade!
-
 module Tech404
   module Index
     def self.logger
       @logger ||= Logger.new(STDOUT)
+    end
+
+    def self.preboot
+      DataMapper::Logger.new($stdout, :debug)
+      DataMapper.setup(:default, ENV['DATABASE_URL'])
+      DataMapper.finalize
     end
   end
 end

@@ -1,2 +1,2 @@
 bot: bin/chatbot
-web: rackup -p $PORT
+web: bin/puma -C config/puma.rb
