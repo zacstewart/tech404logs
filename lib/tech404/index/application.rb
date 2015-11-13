@@ -48,6 +48,7 @@ module Tech404
           text = UserMentionFilter.apply(text)
           text = ChannelMentionFilter.apply(text)
           text = MessageFormatFilter.apply(text)
+          text = LinkFormatFilter.apply(text)
           text
         end
 
