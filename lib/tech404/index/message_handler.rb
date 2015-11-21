@@ -12,10 +12,7 @@ module Tech404
       end
 
       def handle
-        case type
-        when :default
-          messages.store(message)
-        end
+        messages.store(message)
       end
 
       private
