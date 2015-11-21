@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    tech404-index (0.1.0)
+    tech404-index (0.2.0)
       data_mapper
       dm-postgres-adapter
       faraday
