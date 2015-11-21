@@ -1,4 +1,7 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
+require 'simplecov'
+SimpleCov.start { add_filter '/test/' }
+
 require 'tech404/index'
 
 require 'minitest/spec'
