@@ -28,7 +28,7 @@ module Tech404
         logger.debug 'Connected to RTM socket'
       end
 
-      def on_message(message)
+      def on_message(event)
         logger.debug "RTM message received: #{message.data}"
         reactor.defer { EventHandler.handle(message) }
       end
