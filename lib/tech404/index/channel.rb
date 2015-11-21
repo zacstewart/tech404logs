@@ -23,6 +23,10 @@ module Tech404
           }
         end.save
       end
+
+      def self.join(channel)
+        create_or_update(channel)
+      end
     end
   end
 end

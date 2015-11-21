@@ -30,7 +30,7 @@ module Tech404
 
       def on_message(event)
         logger.debug "RTM message received: #{message.data}"
-        reactor.defer { EventHandler.handle(message) }
+        reactor.defer { EventHandler.handle(message.data) }
       end
 
       def on_close(close)

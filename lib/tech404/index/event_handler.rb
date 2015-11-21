@@ -5,9 +5,11 @@ module Tech404
         new(event).handle
       end
 
-      def initialize(event)
-        @event = MultiJson.load(event.data)
+      def initialize(event,
+                     channel_joined_handler: ChannelJoinedHandler)
+        @event = MultiJson.load(event)
         @type = @event.fetch('type')
+        @channel_joined_handler = channel_joined_handler
       end
 
       def handle
@@ -16,12 +18,14 @@ module Tech404
           MessageHandler.handle(event)
         when 'team_join', 'user_change'
           User.store(event.fetch('user'))
+        when 'channel_joined'
+          channel_joined_handler.handle(event)
         end
       end
 
       private
 
-      attr_reader :event, :type
+      attr_reader :channel_joined_handler, :event, :type
     end
   end
 end
