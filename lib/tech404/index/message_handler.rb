@@ -5,21 +5,22 @@ module Tech404
         new(message).handle
       end
 
-      def initialize(message)
+      def initialize(message, messages: Message)
         @message = message
         @type = @message.fetch('subtype') { :default }
+        @messages = messages
       end
 
       def handle
         case type
         when :default
-          Message.store(message)
+          messages.store(message)
         end
       end
 
       private
 
-      attr_reader :message, :type
+      attr_reader :message, :messages, :type
     end
   end
 end
