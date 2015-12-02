@@ -16,7 +16,7 @@ module Tech404
         case type
         when 'message'
           MessageHandler.handle(event)
-        when 'team_join', 'user_change'
+        when 'user_change'
           User.store(event.fetch('user'))
         when 'channel_joined'
           channel_joined_handler.handle(event)
