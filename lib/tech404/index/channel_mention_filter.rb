@@ -3,6 +3,12 @@ module Tech404
     class ChannelMentionFilter
       MENTION_PATTERN = /<#(?<id>C[A-Z0-9]+)(?:\|(?<name>[^>]+))?>/
 
+      class UnknownChannel
+        def name
+          "unknown-channel"
+        end
+      end
+
       def self.apply(text)
         new(text).apply
       end
@@ -14,7 +20,7 @@ module Tech404
 
       def apply
         text.gsub(MENTION_PATTERN) do
-          name = $~[:name] || channel_repo.get($~[:id]).name
+          name = $~[:name] || find_channel($~[:id]).name
           "##{name}"
         end
       end
@@ -22,6 +28,10 @@ module Tech404
       private
 
       attr_reader :text, :channel_repo
+
+      def find_channel(id)
+        channel_repo.get(id) || UnknownChannel.new
+      end
     end
   end
 end
