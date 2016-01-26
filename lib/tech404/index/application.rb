@@ -3,8 +3,10 @@ require 'date'
 module Tech404
   module Index
     class Application < Sinatra::Base
+      HOME_CHANNEL = ENV.fetch('HOME_CHANNEL').freeze
+
       get '/' do
-        @channel = Channel.first(name: 'general')
+        @channel = Channel.first(name: HOME_CHANNEL)
         @messages = @channel.messages.on_date(date).ascending
         content_type :html
         erb :messages
