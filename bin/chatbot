@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 $LOAD_PATH.unshift File.join(File.dirname(File.dirname(__FILE__)), 'lib')
 $stdout.sync = true
-require 'tech404/index'
+require 'tech404logs'
 
-Tech404::Index.preboot
-Tech404::Index::Connection.new.run
+Tech404logs.preboot
+Tech404logs::Connection.new.run

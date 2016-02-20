@@ -1,4 +1,4 @@
-require 'tech404/index'
+require 'tech404logs'
 
 workers Integer(ENV['WEB_CONCURRENCY'] || 2)
 threads_count = Integer(ENV['MAX_THREADS'] || 5)
@@ -11,9 +11,9 @@ port ENV['PORT']     || 3000
 environment ENV['RACK_ENV'] || 'development'
 
 before_fork do
-  Tech404::Index.preboot
+  Tech404logs.preboot
 
-  if Tech404::Index.production?
+  if Tech404logs.production?
     fork do
       Process.exec('bin/chatbot')
     end
@@ -21,5 +21,5 @@ before_fork do
 end
 
 on_worker_boot do
-  Tech404::Index.preboot
+  Tech404logs.preboot
 end

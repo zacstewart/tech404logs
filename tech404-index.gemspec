@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'tech404/index/version'
+require 'tech404logs/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "tech404-index"
-  spec.version       = Tech404::Index::VERSION
+  spec.version       = Tech404logs::VERSION
   spec.authors       = ["Zac Stewart"]
   spec.email         = ["zgstewart@gmail.com"]
 
@@ -30,6 +30,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'multi_json', '~> 1.11.2'
   spec.add_dependency 'faye-websocket', '~> 0.10.0'
   spec.add_dependency 'dm-postgres-adapter'
+  spec.add_dependency 'dm-migrations'
   spec.add_dependency 'data_mapper'
   spec.add_dependency 'sinatra'
   spec.add_dependency 'faraday'
