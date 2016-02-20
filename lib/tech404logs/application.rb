@@ -11,6 +11,11 @@ module Tech404logs
       erb :messages
     end
 
+    get '/sitemap' do
+      content_type :xml
+      erb :sitemap, layout: false
+    end
+
     get '/:channel_name/?:date?' do
       @channel = Channel.first(name: params[:channel_name])
       @messages = @channel.messages.on_date(date).ascending

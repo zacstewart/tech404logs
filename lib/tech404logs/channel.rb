@@ -27,5 +27,9 @@ module Tech404logs
     def self.join(channel)
       create_or_update(channel)
     end
+
+    def last_message
+      messages.ascending.last
+    end
   end
 end
