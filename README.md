@@ -1,4 +1,4 @@
-# Tech404::Index
+# Tech404logs
 
 This robot indexes channels on [tech404](http://tech404.io). Simply invite
 `@indexbot` to your channel to add it to the index. It listens in the channel

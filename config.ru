@@ -1,5 +1,5 @@
 $LOAD_PATH.unshift File.join(File.dirname(__FILE__), 'lib')
-require 'tech404/index'
+require 'tech404logs'
 
-use Rack::CommonLogger, Tech404::Index.logger
-run Tech404::Index::Application
+use Rack::CommonLogger, Tech404logs.logger
+run Tech404logs::Application
