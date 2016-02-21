@@ -135,6 +135,15 @@ a {
   line-height: 1rem;
   float: left;
 }
+.content .messages .message .message-header .mention-name {
+  color: #babbbf;
+  font-size: .75rem;
+  line-height: 1rem;
+  display: block;
+  float: left;
+  margin-left: 6px;
+  margin-top: 2px;
+}
 .content .messages .message .message-header .timestamp {
   color: #babbbf;
   font-size: .75rem;

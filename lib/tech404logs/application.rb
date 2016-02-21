@@ -57,12 +57,6 @@ module Tech404logs
         text = LinkFormatFilter.apply(text)
         text
       end
-
-      def user_name(user)
-        name = user.real_name.to_s
-        name = user.name if name.empty?
-        name
-      end
     end
   end
 end

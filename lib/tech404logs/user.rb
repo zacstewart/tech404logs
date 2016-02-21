@@ -24,5 +24,9 @@ module Tech404logs
         self.first_or_create(id: user_or_id)
       end
     end
+
+    def pretty_name
+      real_name || name
+    end
   end
 end
