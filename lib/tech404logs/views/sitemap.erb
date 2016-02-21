@@ -13,7 +13,7 @@
     <% channel.active_dates.each do |date| %>
       <url>
         <loc><%= url(channel_path(channel, date)) %></loc>
-        <lastmod><%= channel.last_active_on(date).iso8601 %></lastmod>
+        <lastmod><%= (date + 1).to_datetime.iso8601 %></lastmod>
       </url>
     <% end %>
   <% end %>
