@@ -28,8 +28,24 @@ module Tech404logs
       create_or_update(channel)
     end
 
-    def last_message
-      messages.ascending.last
+    def active_dates
+      first_active_at.to_date..last_active_at.to_date
+    end
+
+    def first_active_at
+      messages.ascending.first.timestamp
+    end
+
+    def last_active_at
+      messages.ascending.last.timestamp
+    end
+
+    def last_active_on(date)
+      if message = messages.on_date(date).ascending.last
+        message.timestamp
+      else
+        date.to_datetime
+      end
     end
   end
 end

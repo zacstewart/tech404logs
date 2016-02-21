@@ -7,8 +7,14 @@
 
   <% channels.each do |channel| %>
     <url>
-      <loc><%= url("/#{channel.name}") %></loc>
-      <lastmod><%= channel.last_message.timestamp.iso8601 %></lastmod>
+      <loc><%= url(channel_path(channel)) %></loc>
+      <lastmod><%= channel.last_active_at.iso8601 %></lastmod>
     </url>
+    <% channel.active_dates.each do |date| %>
+      <url>
+        <loc><%= url(channel_path(channel, date)) %></loc>
+        <lastmod><%= channel.last_active_on(date).iso8601 %></lastmod>
+      </url>
+    <% end %>
   <% end %>
 </urlset>
