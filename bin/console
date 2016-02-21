@@ -9,6 +9,9 @@ require 'tech404logs'
 # (If you use this, don't forget to add pry to your Gemfile!)
 # require "pry"
 # Pry.start
+include Tech404logs
+Tech404logs.preboot
+
 
 require "irb"
 IRB.start
