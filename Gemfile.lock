@@ -10,6 +10,7 @@ PATH
       le
       multi_json (~> 1.11.2)
       puma
+      rack-rewrite
       sinatra
 
 GEM
@@ -88,6 +89,7 @@ GEM
     rack (1.6.4)
     rack-protection (1.5.3)
       rack
+    rack-rewrite (1.5.1)
     rake (10.4.2)
     simplecov (0.10.0)
       docile (~> 1.1.0)
