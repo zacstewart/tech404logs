@@ -18,6 +18,10 @@ require 'tech404logs/user_mention_filter'
 require 'tech404logs/version'
 
 module Tech404logs
+  def self.configuration
+    @configuration ||= Configuration.new
+  end
+
   def self.logger
     @logger ||= if production?
       Le.new(ENV['LOGENTRIES_TOKEN'], debug: true, local: true)
