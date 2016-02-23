@@ -11,7 +11,7 @@ module Tech404logs
       erb :messages
     end
 
-    get '/sitemap' do
+    get %r{/sitemap(.xml)?} do
       content_type :xml
       erb :sitemap, layout: false
     end
