@@ -10,10 +10,10 @@
       <loc><%= url(channel_path(channel)) %></loc>
       <lastmod><%= channel.last_active_at.iso8601 %></lastmod>
     </url>
-    <% channel.active_dates.each do |date| %>
+    <% channel.active_dates.each do |activity| %>
       <url>
-        <loc><%= url(channel_path(channel, date)) %></loc>
-        <lastmod><%= (date + 1).to_datetime.iso8601 %></lastmod>
+        <loc><%= url(channel_path(channel, activity.date)) %></loc>
+        <lastmod><%= activity.last_active_at %></lastmod>
       </url>
     <% end %>
   <% end %>

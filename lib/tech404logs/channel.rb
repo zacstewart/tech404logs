@@ -29,11 +29,15 @@ module Tech404logs
     end
 
     def active_dates
-      first_active_at.to_date..last_active_at.to_date
-    end
-
-    def first_active_at
-      messages.ascending.first.timestamp
+      messages.repository.adapter.select(<<-SQL)
+        SELECT
+          distinct(date(timestamp)) as date,
+          max(timestamp) as last_active_at
+        FROM messages
+        WHERE channel_id = '#{id}'
+        GROUP BY date
+        ORDER BY date
+      SQL
     end
 
     def last_active_at
