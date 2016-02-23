@@ -18,7 +18,7 @@
         <span class="user-name"><%= user.pretty_name %></span>
         <small class="mention-name">@<%= user.name %></small>
         <time class="timestamp">
-          <%= paragraph.first.timestamp.strftime('%-H:%M') %>
+          <%= format_time(paragraph.first.timestamp) %>
         </time>
       </div>
       <div class="contents">

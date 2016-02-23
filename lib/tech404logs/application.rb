@@ -59,6 +59,10 @@ module Tech404logs
         text = LinkFormatFilter.apply(text)
         text
       end
+
+      def format_time(time, format: '%-H:%M')
+        time.in_time_zone.strftime(format)
+      end
     end
   end
 end
