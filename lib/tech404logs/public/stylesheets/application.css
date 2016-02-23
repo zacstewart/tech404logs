@@ -65,6 +65,16 @@ form.search {
   height: 100%;
   overflow: auto;
 }
+.content .footer {
+  text-align: center;
+  font-size: .75rem;
+}
+.content .footer a:link,
+.content .footer a:hover,
+.content .footer a:visited,
+.content .footer a:active {
+  color: #babbbf;
+}
 .content .header {
   margin-bottom: 16px;
   margin-top: 16px;
