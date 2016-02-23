@@ -1,8 +1,10 @@
-require 'date'
-
 module Tech404logs
   class Application < Sinatra::Base
     HOME_CHANNEL = ENV.fetch('HOME_CHANNEL').freeze
+
+    before do
+      Time.zone = Tech404logs.configuration.time_zone
+    end
 
     get '/' do
       @channel = Channel.first(name: HOME_CHANNEL)
@@ -26,9 +28,9 @@ module Tech404logs
     helpers do
       def date
         if params[:date]
-          Date.strptime(params[:date], '%Y-%m-%d')
+          Time.zone.parse(params[:date][0..10])
         else
-          Date.today
+          Time.zone.now
         end
       end
 

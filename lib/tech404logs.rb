@@ -1,3 +1,4 @@
+require 'active_support/all'
 require 'data_mapper'
 require 'le'
 require 'logger'

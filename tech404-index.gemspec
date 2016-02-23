@@ -27,6 +27,7 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
+  spec.add_dependency 'activesupport'
   spec.add_dependency 'multi_json', '~> 1.11.2'
   spec.add_dependency 'faye-websocket', '~> 0.10.0'
   spec.add_dependency 'dm-postgres-adapter'
