@@ -1,3 +1,8 @@
 <form action="<%= url('/search') %>" method="get" class="search">
-  <input class="u-full-width" name="q" type="search" placeholder="Search…">
+  <input
+    class="u-full-width"
+    name="q"
+    type="search"
+    placeholder="Search…"
+    value="<%= params[:q] %>">
 </form>
