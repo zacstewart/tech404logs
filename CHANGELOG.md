@@ -2,8 +2,8 @@
 
 ## [0.3.0] - 2016-02-16
 ### Changed
-- Renamed project to Tech404logs and set up
-  domain[www.tech404logs.com](http://www.tech404logs.com)
+- Renamed project to Tech404logs and set up domain
+  [www.tech404logs.com](http://www.tech404logs.com)
 
 ### Added
 - Timezone awareness: splits days on midnight EST, show's all times in EST.
