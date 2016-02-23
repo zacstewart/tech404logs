@@ -74,6 +74,15 @@ module Tech404logs
       def format_time(time, format: '%-H:%M')
         time.in_time_zone.strftime(format)
       end
+
+      def title
+        [].tap do |parts|
+          parts << @channel.name if @channel
+          parts << params[:q] if params[:q]
+          parts << 'Tech404logs'
+          parts << "Archived transcripts from Atlanta's Tech404 community Slack"
+        end.join(' | ')
+      end
     end
   end
 end
