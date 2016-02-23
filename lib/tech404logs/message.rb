@@ -10,6 +10,7 @@ module Tech404logs
     property :timestamp, DateTime
 
     belongs_to :user
+    belongs_to :channel
 
     def self.store(message)
       transaction do

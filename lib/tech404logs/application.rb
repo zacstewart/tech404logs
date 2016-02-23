@@ -1,5 +1,6 @@
 module Tech404logs
   class Application < Sinatra::Base
+    FULLTEXT = "to_tsvector('english', text || ' ' || channels.name || ' ' || users.name) @@ plainto_tsquery(?)".freeze
     HOME_CHANNEL = ENV.fetch('HOME_CHANNEL').freeze
 
     before do
@@ -16,6 +17,16 @@ module Tech404logs
     get %r{/sitemap(.xml)?} do
       content_type :xml
       erb :sitemap, layout: false
+    end
+
+    get '/search' do
+      @messages = Message.all(
+        # Trick datamapper into making joins
+        Message.channel.id.gt => 0,
+        Message.user.id.gt => 0,
+        conditions: [FULLTEXT, params[:q]])
+      content_type :html
+      erb :search
     end
 
     get '/:channel_name/?:date?' do

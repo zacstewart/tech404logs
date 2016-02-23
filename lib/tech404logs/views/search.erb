@@ -1,0 +1,28 @@
+<div class="header">
+    <div class="eight columns">
+      <h2 class="channel-name">Search for <%= params[:q] %></h2>
+    </div>
+    <div class="four columns">
+      <%= erb :search_form %>
+    </div>
+</div>
+
+<div class="messages">
+  <% @messages.each do |message| %>
+    <div class="message">
+      <img src="<%= message.user.image %>" class="avatar">
+      <div class="message-header">
+        <span class="user-name"><%= message.user.pretty_name %></span>
+        <small class="mention-name">@<%= message.user.name %></small>
+        <time class="timestamp">
+          <%= format_time(message.timestamp, format: '%-d %b %Y, %-H:%M') %>
+        </time>
+      </div>
+      <div class="contents">
+        <div class="message-content">
+          <p><%= format_message message.text %></p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
