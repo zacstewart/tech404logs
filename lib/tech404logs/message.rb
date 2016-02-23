@@ -27,7 +27,7 @@ module Tech404logs
     end
 
     def self.on_date(date)
-      all(timestamp: (date...date + 1))
+      all(timestamp: (date.beginning_of_day..date.end_of_day))
     end
   end
 end

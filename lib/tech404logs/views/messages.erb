@@ -1,12 +1,12 @@
 <div class="header">
   <h2 class="channel-name">#<%= @channel.name %></h2>
 
-  <a class="previous-day" href="<%= channel_path(@channel, date - 1) %>">
-    ← <%= (date - 1).strftime('%Y-%m-%d') %>
+  <a class="previous-day" href="<%= channel_path(@channel, date.advance(days: -1)) %>">
+    ← <%= date.advance(days: -1).strftime('%Y-%m-%d') %>
   </a>
 
-  <a class="next-day" href="<%= channel_path(@channel, date + 1) %>">
-    <%= (date + 1).strftime('%Y-%m-%d') %> →
+  <a class="next-day" href="<%= channel_path(@channel, date.advance(days: 1)) %>">
+    <%= date.advance(days: 1).strftime('%Y-%m-%d') %> →
   </a>
 </div>
 
