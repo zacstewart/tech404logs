@@ -9,13 +9,15 @@
 
 <div class="messages">
   <% @messages.each do |message| %>
-    <div class="message">
+    <div class="message" id="<%= message_dom_id(message) %>">
       <img src="<%= message.user.image %>" class="avatar">
       <div class="message-header">
         <span class="user-name"><%= message.user.pretty_name %></span>
         <small class="mention-name">@<%= message.user.name %></small>
         <time class="timestamp">
-          <%= format_time(message.timestamp, format: '%-d %b %Y, %-H:%M') %>
+          <a href="<%= url(message_path(message)) %>">
+            <%= format_time(message.timestamp) %>
+          </a>
         </time>
       </div>
       <div class="contents">
