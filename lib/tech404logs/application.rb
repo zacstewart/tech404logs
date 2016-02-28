@@ -75,6 +75,15 @@ module Tech404logs
         time.in_time_zone.strftime(format)
       end
 
+      def message_dom_id(message)
+        "message-#{message.id}"
+      end
+
+      def message_path(message)
+        channel = channel_path(message.channel, message.timestamp)
+        "#{channel}##{message_dom_id(message)}"
+      end
+
       def title
         [].tap do |parts|
           parts << @channel.name if @channel

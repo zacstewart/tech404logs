@@ -18,20 +18,24 @@
 
 <div class="messages">
   <% @messages.chunk(&:user).each do |user, paragraph| %>
-    <div class="message">
+    <div class="message" id="<%= message_dom_id(paragraph.first) %>">
       <img src="<%= user.image %>" class="avatar">
       <div class="message-header">
         <span class="user-name"><%= user.pretty_name %></span>
         <small class="mention-name">@<%= user.name %></small>
         <time class="timestamp">
-          <%= format_time(paragraph.first.timestamp) %>
+        <a href="<%= url(message_path(paragraph.first)) %>">
+            <%= format_time(paragraph.first.timestamp) %>
+          </a>
         </time>
       </div>
       <div class="contents">
         <div class="message-content">
           <p><%= format_message paragraph.first.text %></p>
           <% paragraph.drop(1).each do |message| %>
-            <p><%= format_message message.text %></p>
+            <p id="<%= message_dom_id(message) %>">
+              <%= format_message message.text %>
+            </p>
           <% end %>
         </div>
       </div>
