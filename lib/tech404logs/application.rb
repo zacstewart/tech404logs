@@ -33,10 +33,15 @@ module Tech404logs
 
     get '/:channel_name/?:date?' do
       @channel = Channel.first(name: params[:channel_name])
+      not_found unless @channel
       @messages = @channel.messages.on_date(date).ascending
       @canonical_path = channel_path(@channel, date)
       content_type :html
       erb :messages
+    end
+
+    def not_found
+      halt(404, erb(:not_found))
     end
 
     helpers do
