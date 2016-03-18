@@ -33,15 +33,17 @@
         <div class="header">
           <h1>tech404</h1>
         </div>
-        <ul class="channels">
-          <% channels.each do |channel| %>
-            <li class="channel">
-              <a href="<%= channel_path(channel) %>">
-                <%= channel.name %>
-              </a>
-            </li>
-          <% end %>
-        </ul>
+        <nav>
+          <ul class="channels">
+            <% channels.each do |channel| %>
+              <li class="channel">
+                <a href="<%= channel_path(channel) %>">
+                  <%= channel.name %>
+                </a>
+              </li>
+            <% end %>
+          </ul>
+        </nav>
       </div>
       <div class="content ten columns">
         <%= yield %>
