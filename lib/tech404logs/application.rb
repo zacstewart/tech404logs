@@ -10,6 +10,7 @@ module Tech404logs
     get '/' do
       @channel = Channel.first(name: HOME_CHANNEL)
       @messages = @channel.messages.on_date(date).ascending
+      @canonical_path = channel_path(@channel, date)
       content_type :html
       erb :messages
     end
@@ -25,6 +26,7 @@ module Tech404logs
         Message.channel.id.gt => 0,
         Message.user.id.gt => 0,
         conditions: [FULLTEXT, params[:q]])
+      @canonical_path = search_path(params[:q])
       content_type :html
       erb :search
     end
@@ -32,6 +34,7 @@ module Tech404logs
     get '/:channel_name/?:date?' do
       @channel = Channel.first(name: params[:channel_name])
       @messages = @channel.messages.on_date(date).ascending
+      @canonical_path = channel_path(@channel, date)
       content_type :html
       erb :messages
     end
@@ -91,6 +94,10 @@ module Tech404logs
           parts << 'Tech404logs'
           parts << "Archived transcripts from Atlanta's Tech404 community Slack"
         end.join(' | ')
+      end
+
+      def search_path(query)
+        "/search?q=#{query}"
       end
     end
   end
