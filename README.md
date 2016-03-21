@@ -43,7 +43,7 @@ git commits and tags, and push the `.gem` file to
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/zacstewart/tech404-search.
+Bug reports and pull requests are welcome on GitHub at https://github.com/zacstewart/tech404logs.
 
 
 ## License
