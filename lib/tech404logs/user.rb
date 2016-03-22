@@ -1,3 +1,5 @@
+require 'thread'
+
 module Tech404logs
   class User
     include DataMapper::Resource
@@ -8,6 +10,10 @@ module Tech404logs
     property :real_name, String
     property :image, String, length: 255
 
+    def self.lock
+      @lock ||= Mutex.new
+    end
+
     def self.create_or_update(user)
       first_or_new(id: user.fetch('id')).tap do |record|
         record.name = user.fetch('name')
@@ -17,11 +23,13 @@ module Tech404logs
     end
 
     def self.store(user_or_id)
-      case user_or_id
-      when Hash
-        self.create_or_update(user_or_id)
-      when String
-        self.first_or_create(id: user_or_id)
+      lock.synchronize do
+        case user_or_id
+        when Hash
+          create_or_update(user_or_id)
+        when String
+          first_or_create(id: user_or_id)
+        end
       end
     end
 
