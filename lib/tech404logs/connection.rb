@@ -47,7 +47,7 @@ module Tech404logs
     end
 
     def url
-      rtm.fetch('url')
+      @url ||= rtm.fetch('url')
     end
 
     def rtm
