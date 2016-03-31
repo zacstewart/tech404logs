@@ -11,10 +11,13 @@ module Tech404logs
       @ws = nil
     end
 
-    def run
+    def start
       sync_channels
       sync_users
+      run
+    end
 
+    def run
       reactor.run do
         @ws = Faye::WebSocket::Client.new(url, [])
         ws.onopen = method(:on_open)
@@ -35,7 +38,7 @@ module Tech404logs
     def on_close(close)
       logger.debug "RTM connection closed: #{close.code}, #{close.reason}"
       reactor.stop
-      @ws = nil
+      run
     end
 
     private

@@ -4,4 +4,4 @@ $stdout.sync = true
 require 'tech404logs'
 
 Tech404logs.preboot
-Tech404logs::Connection.new.run
+Tech404logs::Connection.new.start
