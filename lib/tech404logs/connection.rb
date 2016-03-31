@@ -14,16 +14,22 @@ module Tech404logs
     def start
       sync_channels
       sync_users
+      reactor.error_handler(&method(:on_error))
       run
     end
 
     def run
       reactor.run do
         @ws = Faye::WebSocket::Client.new(url, [])
-        ws.onopen = method(:on_open)
-        ws.onclose = method(:on_close)
-        ws.onmessage = method(:on_message)
+        @ws.onopen = method(:on_open)
+        @ws.onclose = method(:on_close)
+        @ws.onmessage = method(:on_message)
+        @ws.onerror = method(:on_error)
       end
+    end
+
+    def on_error(error)
+      warn "Exception raised in event loop: #{error.inspect}"
     end
 
     def on_open(event)
