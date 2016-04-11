@@ -5,6 +5,11 @@
   xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
   http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
+  <url>
+    <loc><%= url('/') %></loc>
+    <lastmod><%= Time.current.iso8601 %></lastmod>
+  </url>
+
   <% channels.each do |channel| %>
     <url>
       <loc><%= url(channel_path(channel)) %></loc>
