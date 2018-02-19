@@ -22,7 +22,7 @@ module Tech404logs
 
     get %r{/sitemap(.xml)?} do
       content_type :xml
-      erb :sitemap, layout: false
+      Sitemap.to_xml
     end
 
     get '/search' do

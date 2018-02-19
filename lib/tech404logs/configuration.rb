@@ -11,5 +11,9 @@ module Tech404logs
     def web_domain
       @web_domain ||= ENV.fetch('WEB_DOMAIN') { "localhost:#{ENV.fetch('PORT')}" }
     end
+
+    def use_https?
+      @use_https ||= !!ENV.fetch('USE_HTTPS') { false }
+    end
   end
 end
