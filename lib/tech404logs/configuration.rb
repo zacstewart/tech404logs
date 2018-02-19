@@ -16,7 +16,7 @@ module Tech404logs
     end
 
     def sitemap_splits
-      ENV.fetch('SITEMAP_SPLITS', 3)
+      @sitemap_splits ||= Integer(ENV.fetch('SITEMAP_SPLITS', 3))
     end
 
     def time_zone
