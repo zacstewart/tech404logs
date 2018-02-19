@@ -14,6 +14,11 @@ task :environment do
   Tech404logs.preboot
 end
 
+task sitemap: :environment do
+  Tech404logs.configuration.memcached.set(
+    'sitemap', Tech404logs::Sitemap.to_xml)
+end
+
 namespace :db do
   task auto: :environment do
     DataMapper.auto_upgrade!
