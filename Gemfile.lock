@@ -13,6 +13,7 @@ PATH
       multi_json (~> 1.11.2)
       puma
       rack-rewrite
+      rake
       sinatra
 
 GEM
@@ -104,7 +105,7 @@ GEM
     rack-protection (2.0.1)
       rack
     rack-rewrite (1.5.1)
-    rake (10.5.0)
+    rake (12.3.0)
     simplecov (0.11.2)
       docile (~> 1.1.0)
       json (~> 1.8)
@@ -132,7 +133,6 @@ DEPENDENCIES
   bundler (~> 1.10)
   minitest
   mocha
-  rake (~> 10.0)
   simplecov
   tech404-index!
 
