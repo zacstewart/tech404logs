@@ -25,10 +25,8 @@ module Tech404logs
 
     get %r{/sitemap(.xml)?} do
       content_type :xml
-
-      cache('sitemap', 1.hour) do
-        Sitemap.to_xml
-      end
+      Tech404logs.cache.get_splits(
+        'sitemap', Tech404logs.configuration.sitemap_splits)
     end
 
     get '/search' do
@@ -63,17 +61,8 @@ module Tech404logs
 
     private
 
-    def cache(key, ttl = 1.minute, options = {})
-      cached = memcached.get(key)
-      return cached unless cached.nil?
-
-      fresh = yield
-      memcached.set(key, fresh, ttl, options)
-      fresh
-    end
-
-    def memcached
-      Tech404logs.configuration.memcached
+    def cache(key, ttl = 1.minute, options = {}, &block)
+      Tech404logs.cache.fetch(key, ttl, options, &block)
     end
 
   end

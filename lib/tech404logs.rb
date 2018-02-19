@@ -6,6 +6,7 @@ require 'logger'
 require 'sinatra/base'
 require 'tech404logs/helpers'
 require 'tech404logs/application'
+require 'tech404logs/cache'
 require 'tech404logs/channel'
 require 'tech404logs/channel_joined_handler'
 require 'tech404logs/channel_mention_filter'
@@ -22,6 +23,10 @@ require 'tech404logs/user_mention_filter'
 require 'tech404logs/version'
 
 module Tech404logs
+  def self.cache
+    @cache ||= Cache.new
+  end
+
   def self.configuration
     @configuration ||= Configuration.new
   end

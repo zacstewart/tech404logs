@@ -15,8 +15,10 @@ task :environment do
 end
 
 task sitemap: :environment do
-  Tech404logs.configuration.memcached.set(
-    'sitemap', Tech404logs::Sitemap.to_xml)
+  Tech404logs.cache.set_splits(
+    'sitemap',
+    Tech404logs.configuration.sitemap_splits,
+    Tech404logs::Sitemap.to_xml)
 end
 
 namespace :db do
