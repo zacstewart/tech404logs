@@ -4,17 +4,18 @@ This robot indexes channels on [tech404](http://tech404.io). Simply invite
 `@indexbot` to your channel to add it to the index. It listens in the channel
 and logs messages in real time, so it cannot index past content.
 
-
-## Installation
-
-    $ gem install tech404-index
-
-
 ## Usage
 
-You need to have a database created and put in the `DATABASE_URL` environment
-variable. you also need a Slack API token. Create a bot integration, and put
-the token in the `SLACK_TOKEN` environment variable.
+You need the following environment variables defined:
+
+* `DATABASE_URL`: A PostgreSQL database URL, e.g. `postgres://localhost/tech404logs`
+* `SLACK_TOKEN`: Crate a bot integration and store the token in this variable.
+* `HOME_CHANNEL`: The main channel, which will be shown at the root path. Do not
+  include the # hash mark. Usually "general."
+* `WEB_DOMAIN`: The domain and port (if other than 80) that the web app is
+  accessible on. This is used to redirect requests to non-canonical domains.
+  (e.g. to the herokuapp.com domain rather than your own domain). In
+  development it may be `localhost:5000`.
 
 Run the indexing robot:
 
