@@ -1,4 +1,5 @@
 require 'active_support/all'
+require 'dalli'
 require 'data_mapper'
 require 'le'
 require 'logger'

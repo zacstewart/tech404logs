@@ -28,16 +28,17 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency 'activesupport'
-  spec.add_dependency 'multi_json', '~> 1.11.2'
-  spec.add_dependency 'faye-websocket', '~> 0.10.0'
-  spec.add_dependency 'dm-postgres-adapter'
-  spec.add_dependency 'dm-migrations'
+  spec.add_dependency 'dalli'
   spec.add_dependency 'data_mapper'
-  spec.add_dependency 'sinatra'
+  spec.add_dependency 'dm-migrations'
+  spec.add_dependency 'dm-postgres-adapter'
   spec.add_dependency 'faraday'
-  spec.add_dependency 'puma'
+  spec.add_dependency 'faye-websocket', '~> 0.10.0'
   spec.add_dependency 'le'
+  spec.add_dependency 'multi_json', '~> 1.11.2'
+  spec.add_dependency 'puma'
   spec.add_dependency 'rack-rewrite'
+  spec.add_dependency 'sinatra'
 
   spec.add_development_dependency 'bundler', '~> 1.10'
   spec.add_development_dependency 'rake', '~> 10.0'
