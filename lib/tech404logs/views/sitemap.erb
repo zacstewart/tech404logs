@@ -10,7 +10,8 @@
     <lastmod><%= Time.current.iso8601 %></lastmod>
   </url>
 
-  <% channels.each do |channel| %>
+  <%# Force eager loading not to happen with to_a or it selects all messages %>
+  <% channels.to_a.each do |channel| %>
     <sitmap>
       <loc><%= url(channel_sitemap_path(channel)) %></loc>
       <lastmod><%= channel.last_active_at.iso8601 %></lastmod>
