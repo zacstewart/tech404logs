@@ -32,6 +32,11 @@ module Tech404logs
       erb :sitemap, layout: nil
     end
 
+    get '/root_sitemap.xml' do
+      content_type :xml
+      erb :root_sitemap, layout: nil
+    end
+
     get '/:channel_name/sitemap' do
       channel = Channel.first(name: params[:channel_name])
       not_found unless channel
