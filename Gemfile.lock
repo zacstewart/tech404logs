@@ -93,7 +93,7 @@ GEM
     json_pure (1.8.6)
     le (2.7.6)
     metaclass (0.0.4)
-    minitest (5.8.4)
+    minitest (5.11.3)
     mocha (1.1.0)
       metaclass (~> 0.0.1)
     multi_json (1.11.3)
@@ -130,7 +130,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler (~> 1.10)
+  bundler (~> 1.17.3)
   minitest
   mocha
   simplecov
@@ -140,4 +140,4 @@ RUBY VERSION
    ruby 2.3.0p0
 
 BUNDLED WITH
-   1.16.1
+   1.17.3

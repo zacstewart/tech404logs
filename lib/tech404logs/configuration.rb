@@ -15,10 +15,6 @@ module Tech404logs
                                      password: password)
     end
 
-    def sitemap_splits
-      @sitemap_splits ||= Integer(ENV.fetch('SITEMAP_SPLITS', 3))
-    end
-
     def time_zone
       @time_zone ||= ENV.fetch('TIME_ZONE') { 'Eastern Time (US & Canada)' }
     end
