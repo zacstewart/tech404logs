@@ -41,7 +41,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rake'
   spec.add_dependency 'sinatra'
 
-  spec.add_development_dependency 'bundler', '~> 2.0'
+  spec.add_development_dependency 'bundler', '~> 1.17.3'
   spec.add_development_dependency 'minitest'
   spec.add_development_dependency 'mocha'
   spec.add_development_dependency 'simplecov'
