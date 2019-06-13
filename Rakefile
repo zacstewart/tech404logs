@@ -14,13 +14,6 @@ task :environment do
   Tech404logs.preboot
 end
 
-task sitemap: :environment do
-  Tech404logs.cache.set_splits(
-    'sitemap',
-    Tech404logs.configuration.sitemap_splits,
-    Tech404logs::Sitemap.to_xml)
-end
-
 namespace :db do
   task auto: :environment do
     DataMapper.auto_upgrade!

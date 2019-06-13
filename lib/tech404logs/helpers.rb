@@ -1,17 +1,16 @@
 module Tech404logs
   module Helpers
     def channel_path(channel_or_name, date = nil)
-      name = case channel_or_name
-             when Channel
-               channel_or_name.name
-             when String
-               channel_or_name
-             end
+      name = channel_name(channel_or_name)
       if date
         "/#{name}/#{date.strftime('%Y-%m-%d')}"
       else
         "/#{name}"
       end
+    end
+
+    def channel_sitemap_path(channel_or_name)
+      "/#{channel_name(channel_or_name)}/sitemap.xml"
     end
 
     def date
@@ -58,6 +57,18 @@ module Tech404logs
 
     def search_path(query)
       "/search?q=#{query}"
+    end
+
+    ###
+    # Converts a channel name or channel object into a channel name
+    #
+    def channel_name(channel_or_name)
+      case channel_or_name
+      when Channel
+        channel_or_name.name
+      when String
+        channel_or_name
+      end
     end
   end
 end

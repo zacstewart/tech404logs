@@ -6,14 +6,15 @@
   http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
   <url>
-    <loc><%= url('/') %></loc>
-    <lastmod><%= Time.current.iso8601 %></lastmod>
+    <loc><%= url(channel_path(@channel)) %></loc>
+    <lastmod><%= @channel.last_active_at.iso8601 %></lastmod>
   </url>
 
-  <% channels.each do |channel| %>
-    <sitmap>
-      <loc><%= url(channel_sitemap_path(channel)) %></loc>
-      <lastmod><%= channel.last_active_at.iso8601 %></lastmod>
-    </sitmap>
+  <% @channel.active_dates.each do |activity| %>
+    <url>
+      <loc><%= url(channel_path(@channel, activity.date)) %></loc>
+      <lastmod><%= activity.last_active_at %></lastmod>
+    </url>
   <% end %>
 </urlset>
+

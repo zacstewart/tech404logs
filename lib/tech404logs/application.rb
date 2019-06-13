@@ -23,10 +23,26 @@ module Tech404logs
       end
     end
 
-    get %r{/sitemap(.xml)?} do
+    get '/sitemap' do
+      redirect to('/sitemap.xml')
+    end
+
+    get '/sitemap.xml' do
       content_type :xml
-      Tech404logs.cache.get_splits(
-        'sitemap', Tech404logs.configuration.sitemap_splits)
+      erb :sitemap, layout: nil
+    end
+
+    get '/:channel_name/sitemap' do
+      channel = Channel.first(name: params[:channel_name])
+      not_found unless channel
+      redirect to(channel_sitemap_path(channel.name)), 302
+    end
+
+    get '/:channel_name/sitemap.xml' do
+      @channel = Channel.first(name: params[:channel_name])
+      not_found unless @channel
+      content_type :xml
+      erb :channel_sitemap, layout: nil
     end
 
     get '/search' do
