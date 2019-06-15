@@ -19,20 +19,12 @@ module Tech404logs
     end
 
     def self.store(user_or_id)
-      retries ||= 3
-
       case user_or_id
       when Hash
         create_or_update(user_or_id)
       when String
         first_or_create(id: user_or_id)
       end
-
-    rescue => error
-      # Ugly hack to recover from race conditions
-      retries -= 1
-      warn "#{error.class.name}: #{error.message}"
-      retry if retries > 0
     end
 
     def pretty_name
