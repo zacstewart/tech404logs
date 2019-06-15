@@ -17,14 +17,14 @@
 </div>
 
 <div class="messages">
-  <% @messages.chunk(&:user).each do |user, paragraph| %>
+  <% @messages.each(&:text).chunk(&:user).each do |user, paragraph| %>
     <div class="message" id="<%= message_dom_id(paragraph.first) %>">
       <img src="<%= user.image %>" class="avatar">
       <div class="message-header">
         <span class="user-name"><%= user.pretty_name %></span>
         <small class="mention-name">@<%= user.name %></small>
         <time class="timestamp">
-        <a href="<%= url(message_path(paragraph.first)) %>">
+          <a href="<%= url(message_path(paragraph.first)) %>">
             <%= format_time(paragraph.first.timestamp) %>
           </a>
         </time>
