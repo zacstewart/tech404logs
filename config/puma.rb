@@ -14,8 +14,14 @@ before_fork do
   Tech404logs.preboot
 
   if Tech404logs.production?
-    fork do
-      Process.exec('bin/chatbot')
+    Thread.new do
+      loop do
+        Process.fork do
+          puts "Forked off chatbot process pid #{Process.pid}"
+          Process.exec('bin/chatbot')
+        end
+        Process.wait
+      end
     end
   end
 end
