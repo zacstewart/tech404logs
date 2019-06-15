@@ -65,17 +65,30 @@ module Tech404logs
 
     def sync_channels
       Thread.new do
-        rtm.fetch('channels').each do |channel|
+        rtm.fetch('channels').each_with_index do |channel, i|
           Channel.create_or_update(channel)
+
+          if i % 20 == 0
+            puts 'Garbage collecting'
+            GC.start
+          end
         end
+
+        GC.start
       end
     end
 
     def sync_users
       Thread.new do
-        rtm.fetch('users').each do |user|
+        rtm.fetch('users').each_with_index do |user, i|
           User.store(user)
+          if i % 20 == 0
+            puts 'Garbage collecting'
+            GC.start
+          end
         end
+
+        GC.start
       end
     end
   end
