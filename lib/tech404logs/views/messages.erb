@@ -17,7 +17,7 @@
 </div>
 
 <div class="messages">
-  <% @messages.each(&:text).chunk(&:user).each do |user, paragraph| %>
+  <% @messages.each { |m| m.user; m.text }.chunk(&:user).each do |user, paragraph| %>
     <div class="message" id="<%= message_dom_id(paragraph.first) %>">
       <img src="<%= user.image %>" class="avatar">
       <div class="message-header">
