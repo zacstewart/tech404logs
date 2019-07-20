@@ -58,7 +58,9 @@ module Tech404logs
           # Trick datamapper into making joins
           Message.channel.id.gt => 0,
           Message.user.id.gt => 0,
-          conditions: [FULLTEXT, params[:q]])
+          conditions: [FULLTEXT, params[:q]],
+          limit: 100
+        )
         @canonical_path = search_path(params[:q])
         erb :search
       end
