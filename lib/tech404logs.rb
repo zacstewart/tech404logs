@@ -3,8 +3,8 @@ require 'dalli'
 require 'data_mapper'
 require 'le'
 require 'logger'
-require 'newrelic_rpm'
 require 'sinatra/base'
+
 require 'tech404logs/helpers'
 require 'tech404logs/application'
 require 'tech404logs/cache'
@@ -21,6 +21,9 @@ require 'tech404logs/message_handler'
 require 'tech404logs/user'
 require 'tech404logs/user_mention_filter'
 require 'tech404logs/version'
+
+# Load late so instrumentation gets injected
+require 'newrelic_rpm'
 
 module Tech404logs
   def self.cache
