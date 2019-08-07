@@ -36,6 +36,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'faye-websocket', '~> 0.10.0'
   spec.add_dependency 'le'
   spec.add_dependency 'multi_json', '~> 1.11.2'
+  spec.add_dependency 'newrelic_rpm'
   spec.add_dependency 'puma'
   spec.add_dependency 'rack-rewrite'
   spec.add_dependency 'rake'
