@@ -84,7 +84,7 @@ module Tech404logs
 
     private
 
-    def cache(key, ttl = 1.minute, options = {}, &block)
+    def cache(key, ttl = Tech404logs.configuration.cache_ttl, options = {}, &block)
       Tech404logs.cache.fetch(key, ttl, options, &block)
     end
 

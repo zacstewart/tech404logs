@@ -26,5 +26,13 @@ module Tech404logs
     def web_domain
       @web_domain ||= ENV.fetch('WEB_DOMAIN') { "localhost:#{ENV.fetch('PORT')}" }
     end
+
+    def cache_ttl
+      if Tech404logs.production?
+        1.minute
+      else
+        0
+      end
+    end
   end
 end
