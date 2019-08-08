@@ -12,24 +12,8 @@ environment ENV['RACK_ENV'] || 'development'
 
 before_fork do
   Tech404logs.preboot
-
-  run_chatbot if Tech404logs.production?
 end
 
 on_worker_boot do
   Tech404logs.preboot
-end
-
-def run_chatbot
-  Thread.new do
-    loop do
-      begin
-        puts 'Starting chatbot in a separate thread'
-        Tech404logs::Connection.new.start
-      rescue => error
-        warn 'Chatbot crashed'
-        warn error.message
-      end
-    end
-  end
 end
