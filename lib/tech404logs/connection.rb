@@ -13,7 +13,6 @@ module Tech404logs
 
     def start
       sync_channels
-      sync_users
       reactor.error_handler(&method(:on_error))
       run
     end
@@ -68,20 +67,6 @@ module Tech404logs
         rtm.fetch('channels').each_with_index do |channel, i|
           Channel.create_or_update(channel)
 
-          if i % 20 == 0
-            puts 'Garbage collecting'
-            GC.start
-          end
-        end
-
-        GC.start
-      end
-    end
-
-    def sync_users
-      Thread.new do
-        rtm.fetch('users').each_with_index do |user, i|
-          User.store(user)
           if i % 20 == 0
             puts 'Garbage collecting'
             GC.start
