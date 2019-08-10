@@ -2,7 +2,7 @@ require "bundler/gem_tasks"
 require "rake/testtask"
 require 'tech404logs'
 
-Rake::TestTask.new(:test) do |t|
+Rake::TestTask.new(test: ['env:test', :environment]) do |t|
   t.libs << 'test'
   t.libs << 'lib'
   t.test_files = FileList['test/**/*_test.rb']
@@ -10,7 +10,22 @@ end
 
 task :default => :test
 
+namespace :env do
+  task :test do
+    ENV['RACK_ENV'] = 'test'
+  end
+end
+
 task :environment do
+  case ENV['RACK_ENV']
+  when 'development'
+  when 'test'
+    ENV['DATABASE_URL'] = ENV['TEST_DATABASE_URL']
+  when 'production'
+  else
+    fail 'Unexpected environment'
+  end
+
   Tech404logs.preboot
 end
 

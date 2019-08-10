@@ -5,10 +5,12 @@ module Tech404logs
     end
 
     def initialize(event,
-                   channel_joined_handler: ChannelJoinedHandler)
+                   channel_joined_handler: ChannelJoinedHandler,
+                   user_handler: Handlers::UserHandler.new)
       @event = MultiJson.load(event)
       @type = @event.fetch('type')
       @channel_joined_handler = channel_joined_handler
+      @user_handler = user_handler
     end
 
     def handle
@@ -16,7 +18,7 @@ module Tech404logs
       when 'message'
         MessageHandler.handle(event)
       when 'user_change'
-        User.store(event.fetch('user'))
+        user_handler.handle(event.fetch('user'))
       when 'channel_joined'
         channel_joined_handler.handle(event)
       end
@@ -24,6 +26,6 @@ module Tech404logs
 
     private
 
-    attr_reader :channel_joined_handler, :event, :type
+    attr_reader :channel_joined_handler, :event, :type, :user_handler
   end
 end
