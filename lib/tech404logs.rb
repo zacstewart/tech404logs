@@ -4,6 +4,7 @@ require 'data_mapper'
 require 'le'
 require 'logger'
 require 'sinatra/base'
+require 'skylight/sinatra'
 
 require 'tech404logs/helpers'
 require 'tech404logs/application'
@@ -34,6 +35,10 @@ module Tech404logs
     @configuration ||= Configuration.new
   end
 
+  def self.environment
+    ENV['RACK_ENV']
+  end
+
   def self.logger
     @logger ||= if production?
       Le.new(ENV['LOGENTRIES_TOKEN'], debug: true, local: true)
@@ -43,12 +48,14 @@ module Tech404logs
   end
 
   def self.preboot
+    Skylight.start!(env: environment)
+
     DataMapper::Logger.new(STDOUT, :debug)
     DataMapper.setup(:default, ENV['DATABASE_URL'])
     DataMapper.finalize
   end
 
   def self.production?
-    ENV['RACK_ENV'] == 'production'
+    environment == 'production'
   end
 end
