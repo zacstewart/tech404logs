@@ -17,8 +17,9 @@ describe Handlers::UserHandler do
 
     describe 'when the user has never been seen before' do
       it 'inserts a new User' do
-        subject.handle(event)
+        returned_id = subject.handle(event)
         User.first(id: id).name.must_equal(my_name)
+        returned_id.must_equal(id)
       end
     end
 
@@ -35,5 +36,13 @@ describe Handlers::UserHandler do
       end
     end
 
+    describe 'when the event is just an id' do
+      let(:event) { id }
+
+      it 'touches the User record' do
+        subject.handle(event)
+        User.first(id: id).id.must_equal(id)
+      end
+    end
   end
 end
