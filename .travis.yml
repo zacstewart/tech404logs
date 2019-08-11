@@ -1,6 +1,11 @@
 services:
   - postgresql
   - memcached
+addons:
+  postgresql: '9.5'
+  apt:
+    packages:
+      - postgresql-server-dev-9.5
 language: ruby
 rvm:
   - 2.3.0
