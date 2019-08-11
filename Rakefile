@@ -2,7 +2,7 @@ require "bundler/gem_tasks"
 require "rake/testtask"
 require 'tech404logs'
 
-Rake::TestTask.new(test: ['env:test', :environment]) do |t|
+Rake::TestTask.new(test: ['env:test', 'db:schema:load', :environment]) do |t|
   t.libs << 'test'
   t.libs << 'lib'
   t.test_files = FileList['test/**/*_test.rb']
@@ -13,25 +13,25 @@ task :default => :test
 namespace :env do
   task :test do
     ENV['RACK_ENV'] = 'test'
+    ENV['DATABASE_URL'] = ENV['TEST_DATABASE_URL']
   end
 end
 
 task :environment do
-  case ENV['RACK_ENV']
-  when 'development'
-  when 'test'
-    ENV['DATABASE_URL'] = ENV['TEST_DATABASE_URL']
-  when 'production'
-  else
-    fail 'Unexpected environment'
-  end
-
   Tech404logs.preboot
 end
 
 namespace :db do
   task auto: :environment do
     DataMapper.auto_upgrade!
+  end
+
+  task :create do
+    system("psql #{ENV['DATABASE_URL']} -c '\\q'")
+    next if $?.success?
+
+    db_name = ENV['DATABASE_URL'].split('/').last.strip
+    sh "createdb #{db_name}"
   end
 
   task load_migrations: :environment do
@@ -65,7 +65,11 @@ namespace :db do
 
   namespace :schema do
     task :dump do
-      `pg_dump -sO #{ENV['DATABASE_URL']} > db/schema.sql`
+      sh "pg_dump -sO #{ENV['DATABASE_URL']} > db/schema.sql"
+    end
+
+    task load: 'db:create' do
+      sh "psql #{ENV['DATABASE_URL']} < db/schema.sql"
     end
   end
 end
