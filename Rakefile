@@ -62,4 +62,10 @@ namespace :db do
       migrate_down!(current.position - 1)
     end
   end
+
+  namespace :schema do
+    task :dump do
+      `pg_dump -sO #{ENV['DATABASE_URL']} > db/schema.sql`
+    end
+  end
 end
