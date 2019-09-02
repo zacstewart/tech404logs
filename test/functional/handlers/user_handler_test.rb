@@ -41,7 +41,9 @@ describe Handlers::UserHandler do
 
       it 'touches the User record' do
         subject.handle(event)
-        User.first(id: id).id.must_equal(id)
+        user = User.first(id: id)
+        user.id.must_equal(id)
+        user.name.must_equal(my_name)
       end
     end
   end
