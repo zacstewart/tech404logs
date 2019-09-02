@@ -12,8 +12,13 @@ module Tech404logs
     end
 
     def start
+      # These are run in forks with their own DB connection
       sync_channels
       sync_users
+
+      # Connect to database
+      Tech404logs.preboot
+
       reactor.error_handler(&method(:on_error))
       run
     end
@@ -64,8 +69,7 @@ module Tech404logs
     end
 
     def sync_channels
-      fork do
-        Tech404logs.preboot
+      WorkerFork.fork do
         rtm.fetch('channels').each do |channel|
           Channel.create_or_update(channel)
         end
@@ -73,8 +77,7 @@ module Tech404logs
     end
 
     def sync_users
-      fork do
-        Tech404logs.preboot
+      WorkerFork.fork do
         user_handler = Handlers::UserHandler.new
         rtm.fetch('users').each do |user|
           user_handler.handle(user)

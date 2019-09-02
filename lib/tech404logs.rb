@@ -29,6 +29,7 @@ require 'tech404logs/version'
 
 # Load late so instrumentation gets injected
 require 'newrelic_rpm'
+require 'tech404logs/worker_fork'
 
 module Tech404logs
   def self.cache
