@@ -66,30 +66,18 @@ module Tech404logs
     def sync_channels
       fork do
         Tech404logs.preboot
-
-        rtm.fetch('channels').each_with_index do |channel, i|
+        rtm.fetch('channels').each do |channel|
           Channel.create_or_update(channel)
-
-          if i % 20 == 0
-            puts 'Garbage collecting'
-            GC.start
-          end
         end
       end
     end
 
     def sync_users
-      user_handler =  Handlers::UserHandler.new
       fork do
         Tech404logs.preboot
-
-        rtm.fetch('users').each_with_index do |user, i|
+        user_handler = Handlers::UserHandler.new
+        rtm.fetch('users').each do |user|
           user_handler.handle(user)
-
-          if i % 20 == 0
-            puts 'Garbage collecting'
-            GC.start
-          end
         end
       end
     end
