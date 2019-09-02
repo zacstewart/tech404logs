@@ -73,8 +73,6 @@ module Tech404logs
             GC.start
           end
         end
-
-        GC.start
       end
     end
 
@@ -83,13 +81,12 @@ module Tech404logs
       fork do
         rtm.fetch('users').each_with_index do |user, i|
           user_handler.handle(user)
+
           if i % 20 == 0
             puts 'Garbage collecting'
             GC.start
           end
         end
-
-        GC.start
       end
     end
   end
