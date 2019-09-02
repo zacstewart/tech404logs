@@ -79,9 +79,10 @@ module Tech404logs
     end
 
     def sync_users
+      user_handler =  Handlers::UserHandler.new
       Thread.new do
         rtm.fetch('users').each_with_index do |user, i|
-          User.store(user)
+          user_handler.handle(user)
           if i % 20 == 0
             puts 'Garbage collecting'
             GC.start
