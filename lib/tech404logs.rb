@@ -58,7 +58,9 @@ module Tech404logs
     DataMapper.setup(:default, ENV['DATABASE_URL'])
     DataMapper.finalize
 
-    Sequel::Model.db = Sequel.connect(ENV['DATABASE_URL'], logger: logger)
+    @db.disconnect if @db
+    Sequel::Model.db = @db =
+      Sequel.connect(ENV['DATABASE_URL'], logger: logger)
   end
 
   def self.production?
