@@ -64,7 +64,7 @@ module Tech404logs
     end
 
     def sync_channels
-      Thread.new do
+      fork do
         rtm.fetch('channels').each_with_index do |channel, i|
           Channel.create_or_update(channel)
 
@@ -80,7 +80,7 @@ module Tech404logs
 
     def sync_users
       user_handler =  Handlers::UserHandler.new
-      Thread.new do
+      fork do
         rtm.fetch('users').each_with_index do |user, i|
           user_handler.handle(user)
           if i % 20 == 0
