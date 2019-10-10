@@ -22,6 +22,7 @@ module Tech404logs
           )
         when String
           table.insert_ignore.insert(id: event_or_id)
+          event_or_id
         end
       end
 
