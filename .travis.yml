@@ -12,7 +12,7 @@ addons:
     - postgresql-client-11
 before_install:
   - gem install bundler -v 2.1.4
-  - sudo apt-get install -y postgresql-11 postgresql-client-11 postgresql-server-dev-11
+  - sudo apt-get install -y postgresql-server-dev-11
 before_script:
   - psql --version
   - psql -c 'CREATE DATABASE test_db;' -U postgres
