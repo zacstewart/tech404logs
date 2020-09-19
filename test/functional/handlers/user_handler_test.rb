@@ -16,7 +16,7 @@ describe Handlers::UserHandler do
     } }
 
     describe 'when the user has never been seen before' do
-      it 'inserts a new User' do
+      it 'inserts a new User and returns its id' do
         returned_id = subject.handle(event)
         User.first(id: id).name.must_equal(my_name)
         returned_id.must_equal(id)
@@ -28,7 +28,12 @@ describe Handlers::UserHandler do
         subject.handle(event.merge('name' => 'Caz'))
       end
 
-      it 'inserts updates the existing User' do
+      it "returns the user's id" do
+        returned_id = subject.handle(event.merge('name' => 'Caz'))
+        returned_id.must_equal(id)
+      end
+
+      it 'updates the existing User' do
         User.first(id: id).name.must_equal('Caz')
 
         subject.handle(event)
@@ -39,11 +44,12 @@ describe Handlers::UserHandler do
     describe 'when the event is just an id' do
       let(:event) { id }
 
-      it 'touches the User record' do
-        subject.handle(event)
+      it 'touches the User record and returns its id' do
+        returned_id = subject.handle(event)
         user = User.first(id: id)
         user.id.must_equal(id)
         user.name.must_equal(my_name)
+        returned_id.must_equal(id)
       end
     end
   end
