@@ -3,6 +3,8 @@ require 'dalli'
 require 'data_mapper'
 require 'le'
 require 'logger'
+require 'pg'
+require 'sequel'
 require 'sinatra/base'
 require 'skylight/sinatra'
 
@@ -15,16 +17,19 @@ require 'tech404logs/channel_mention_filter'
 require 'tech404logs/configuration'
 require 'tech404logs/connection'
 require 'tech404logs/event_handler'
+require 'tech404logs/handlers'
+require 'tech404logs/handlers/user_handler'
+require 'tech404logs/handlers/message_handler'
 require 'tech404logs/link_format_filter'
 require 'tech404logs/message'
 require 'tech404logs/message_format_filter'
-require 'tech404logs/message_handler'
 require 'tech404logs/user'
 require 'tech404logs/user_mention_filter'
 require 'tech404logs/version'
 
 # Load late so instrumentation gets injected
 require 'newrelic_rpm'
+require 'tech404logs/worker_fork'
 
 module Tech404logs
   def self.cache
@@ -53,6 +58,10 @@ module Tech404logs
     DataMapper::Logger.new(STDOUT, :debug)
     DataMapper.setup(:default, ENV['DATABASE_URL'])
     DataMapper.finalize
+
+    @db.disconnect if @db
+    Sequel::Model.db = @db =
+      Sequel.connect(ENV['DATABASE_URL'], logger: logger)
   end
 
   def self.production?

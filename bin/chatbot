@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 $LOAD_PATH.unshift File.join(File.dirname(File.dirname(__FILE__)), 'lib')
 $stdout.sync = true
 require 'tech404logs'
 
-Tech404logs.preboot
 Tech404logs::Connection.new.start

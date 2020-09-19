@@ -12,7 +12,13 @@ module Tech404logs
     end
 
     def start
+      # These are run in forks with their own DB connection
       sync_channels
+      sync_users
+
+      # Connect to database
+      Tech404logs.preboot
+
       reactor.error_handler(&method(:on_error))
       run
     end
@@ -63,17 +69,19 @@ module Tech404logs
     end
 
     def sync_channels
-      Thread.new do
-        rtm.fetch('channels').each_with_index do |channel, i|
+      WorkerFork.fork do
+        rtm.fetch('channels').each do |channel|
           Channel.create_or_update(channel)
-
-          if i % 20 == 0
-            puts 'Garbage collecting'
-            GC.start
-          end
         end
+      end
+    end
 
-        GC.start
+    def sync_users
+      WorkerFork.fork do
+        user_handler = Handlers::UserHandler.new
+        rtm.fetch('users').each do |user|
+          user_handler.handle(user)
+        end
       end
     end
   end

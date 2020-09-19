@@ -12,17 +12,6 @@ module Tech404logs
     belongs_to :user
     belongs_to :channel
 
-    def self.store(message)
-      transaction do
-        create(
-          channel_id: message.fetch('channel'),
-          user: User.store(message.fetch('user')),
-          text: message.fetch('text'),
-          timestamp: Time.at(Float(message.fetch('ts')))
-        )
-      end
-    end
-
     def self.ascending
       all(order: [:timestamp.asc])
     end
