@@ -33,7 +33,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'dm-migrations'
   spec.add_dependency 'dm-postgres-adapter'
   spec.add_dependency 'faraday'
-  spec.add_dependency 'faye-websocket', '~> 0.10.0'
+  spec.add_dependency 'faye-websocket', '>= 0.10', '< 0.12'
   spec.add_dependency 'pg'
   spec.add_dependency 'le'
   spec.add_dependency 'multi_json', '~> 1.11.2'
