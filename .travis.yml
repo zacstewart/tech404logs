@@ -3,7 +3,7 @@ services:
   - memcached
 language: ruby
 rvm:
-  - 2.3.0
+  - 2.7.1
 before_install:
   - sudo apt-get update
   - sudo apt-get --yes remove postgresql\*
@@ -11,7 +11,7 @@ before_install:
   - sudo cp /etc/postgresql/{9.6,11}/main/pg_hba.conf
   - sudo service postgresql restart 11
   - psql --version
-  - gem install bundler -v 1.17.3
+  - gem install bundler -v 2.1.4
 before_script:
   - psql --version
   - psql -c 'CREATE DATABASE test_db;' -U postgres
