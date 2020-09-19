@@ -95,7 +95,7 @@ GEM
       websocket-driver (>= 0.5.1)
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
-    json (1.8.3)
+    json (1.8.6)
     json_pure (1.8.6)
     le (2.7.6)
     metaclass (0.0.4)
@@ -154,7 +154,7 @@ DEPENDENCIES
   tech404-index!
 
 RUBY VERSION
-   ruby 2.3.0p0
+   ruby 2.7.1p83
 
 BUNDLED WITH
    1.17.3
