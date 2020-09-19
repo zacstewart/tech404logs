@@ -17,6 +17,7 @@ env:
 before_install:
   - gem install bundler -v 2.1.4
   - sudo apt-get install -y postgresql-server-dev-11
+  - sudo cp /etc/postgresql/9.6/main/pg_hba.conf /etc/postgresql/11/main/pg_hba.conf
 before_script:
   - psql --version
   - psql -c 'CREATE DATABASE test_db;' -U postgres -p 5433
