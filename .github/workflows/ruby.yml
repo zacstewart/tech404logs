@@ -43,7 +43,8 @@ jobs:
     - name: Bundle install
       run: |
         gem install bundler
-        bundle instal --jobs 4 --retry 3
+        gem install do_postgres  --   --with-pg-lib=/usr/lib
+        bundle install --jobs 4 --retry 3
     - name: Create database
       run: createdb github-actions
     - name: Run tests
