@@ -39,7 +39,7 @@ jobs:
       with:
         ruby-version: ${{ matrix.ruby-version }}
     - name: Install dependent libraries
-      run: sudo apt-get install libpq-dev
+      run: sudo apt-get install libpq-dev postgresql-server-dev-11.13
     - name: Bundle install
       run: |
         gem install bundler
