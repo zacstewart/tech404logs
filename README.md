@@ -1,7 +1,5 @@
 # Tech404logs
 
-[![Build Status](https://travis-ci.org/zacstewart/tech404logs.svg?branch=master)](https://travis-ci.org/zacstewart/tech404logs)
-
 This robot indexes channels on [tech404](http://tech404.io). Simply invite
 `@indexbot` to your channel to add it to the index. It listens in the channel
 and logs messages in real time, so it cannot index past content.
