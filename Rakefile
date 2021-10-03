@@ -21,6 +21,10 @@ task :environment do
   Tech404logs.preboot
 end
 
+task :reindex => [:environment] do
+  Tech404logs.db.execute 'REFRESH MATERIALIZED VIEW searchable_messages'
+end
+
 namespace :db do
   task auto: :environment do
     DataMapper.auto_upgrade!

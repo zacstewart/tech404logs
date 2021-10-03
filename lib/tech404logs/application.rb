@@ -1,7 +1,7 @@
 module Tech404logs
   class Application < Sinatra::Base
 
-    FULLTEXT = "to_tsvector('english', text || ' ' || channels.name || ' ' || users.name) @@ plainto_tsquery(?)".freeze
+    FULLTEXT = "tsv @@ plainto_tsquery(?)".freeze
     HOME_CHANNEL = ENV.fetch('HOME_CHANNEL').freeze
 
     helpers do
@@ -54,10 +54,10 @@ module Tech404logs
       content_type :html
 
       cache(request.fullpath) do
-        @messages = Message.all(
+        @messages = SearchableMessage.all(
           # Trick datamapper into making joins
-          Message.channel.id.gt => 0,
-          Message.user.id.gt => 0,
+          SearchableMessage.channel.id.gt => 0,
+          SearchableMessage.user.id.gt => 0,
           conditions: [FULLTEXT, params[:q]],
           limit: 100
         )

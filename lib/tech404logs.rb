@@ -22,6 +22,7 @@ require 'tech404logs/handlers/user_handler'
 require 'tech404logs/handlers/message_handler'
 require 'tech404logs/link_format_filter'
 require 'tech404logs/message'
+require 'tech404logs/searchable_message'
 require 'tech404logs/message_format_filter'
 require 'tech404logs/user'
 require 'tech404logs/user_mention_filter'
@@ -63,6 +64,11 @@ module Tech404logs
     Sequel::Model.db = @db =
       Sequel.connect(ENV['DATABASE_URL'], logger: logger)
   end
+
+  def self.db
+    @db
+  end
+
 
   def self.production?
     environment == 'production'
