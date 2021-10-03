@@ -65,6 +65,11 @@ module Tech404logs
       Sequel.connect(ENV['DATABASE_URL'], logger: logger)
   end
 
+  def self.db
+    @db
+  end
+
+
   def self.production?
     environment == 'production'
   end
