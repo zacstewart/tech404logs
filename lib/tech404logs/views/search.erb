@@ -17,6 +17,8 @@
         <time class="timestamp">
           <a href="<%= url(message_path(message)) %>">
             <%= format_time(message.timestamp, format: '%-d %b %Y, %-H:%M') %>
+            –
+            #<%= message.channel.name %>
           </a>
         </time>
       </div>
