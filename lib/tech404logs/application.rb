@@ -55,10 +55,8 @@ module Tech404logs
 
       cache(request.fullpath) do
         @messages = SearchableMessage.all(
-          # Trick datamapper into making joins
-          SearchableMessage.channel.id.gt => 0,
-          SearchableMessage.user.id.gt => 0,
           conditions: [FULLTEXT, params[:q]],
+          order: :timestamp.desc,
           limit: 100
         )
         @canonical_path = search_path(params[:q])
