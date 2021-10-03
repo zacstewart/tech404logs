@@ -26,9 +26,6 @@ require 'tech404logs/message_format_filter'
 require 'tech404logs/user'
 require 'tech404logs/user_mention_filter'
 require 'tech404logs/version'
-
-# Load late so instrumentation gets injected
-require 'newrelic_rpm'
 require 'tech404logs/worker_fork'
 
 module Tech404logs
@@ -60,6 +57,11 @@ module Tech404logs
     @db.disconnect if @db
     Sequel::Model.db = @db =
       Sequel.connect(ENV['DATABASE_URL'], logger: logger)
+
+    # Load late so instrumentation gets injected
+    if production?
+      require 'newrelic_rpm'
+    end
   end
 
   def self.db
