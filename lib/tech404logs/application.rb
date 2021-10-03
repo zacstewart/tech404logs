@@ -3,6 +3,7 @@ module Tech404logs
 
     FULLTEXT = "tsv @@ plainto_tsquery(?)".freeze
     HOME_CHANNEL = ENV.fetch('HOME_CHANNEL').freeze
+    SEARCH_RESULTS_PER_PAGE = 100
 
     helpers do
       include Helpers
@@ -54,12 +55,19 @@ module Tech404logs
       content_type :html
 
       cache(request.fullpath) do
+        @results_count = SearchableMessage.count(
+          conditions: [FULLTEXT, params[:q]]
+        )
         @messages = SearchableMessage.all(
           conditions: [FULLTEXT, params[:q]],
           order: :timestamp.desc,
-          limit: 100
+          limit: SEARCH_RESULTS_PER_PAGE,
+          offset: (page - 1) * SEARCH_RESULTS_PER_PAGE
         )
-        @canonical_path = search_path(params[:q])
+
+        @pages = @results_count / SEARCH_RESULTS_PER_PAGE
+
+        @canonical_path = search_path(params[:q], page: page)
         erb :search
       end
     end
@@ -84,6 +92,10 @@ module Tech404logs
 
     def cache(key, ttl = Tech404logs.configuration.cache_ttl, options = {}, &block)
       Tech404logs.cache.fetch(key, ttl, options, &block)
+    end
+
+    def page
+      [params.fetch(:page, 1).to_i, 1].max
     end
 
   end

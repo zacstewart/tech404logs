@@ -55,8 +55,12 @@ module Tech404logs
       end.join(' | ')
     end
 
-    def search_path(query)
-      "/search?q=#{query}"
+    def search_path(query, page: 1)
+      if page > 1
+        "/search?q=#{query}&page=#{page}"
+      else
+        "/search?q=#{query}"
+      end
     end
 
     ###

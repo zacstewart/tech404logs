@@ -1,6 +1,7 @@
 <div class="header">
     <div class="eight columns">
       <h2 class="channel-name">Search for <%= params[:q] %></h2>
+      <p>Found <%= @results_count %> results</p>
     </div>
     <div class="four columns">
       <%= erb :search_form %>
@@ -30,3 +31,23 @@
     </div>
   <% end %>
 </div>
+
+<ol class="pagination">
+  <% if page > 1 %>
+    <li class="pagination-item">
+      <a href="<%= search_path(params[:q], page: page - 1) %>">👈 previous</a>
+    </li>
+  <% end %>
+
+  <% (1..@pages).each do |page| %>
+    <li class="pagination-item">
+      <a href="<%= search_path(params[:q], page: page) %>"><%= page %></a>
+    </li>
+  <% end %>
+
+  <% if page < @pages %>
+    <li class="pagination-item">
+      <a href="<%= search_path(params[:q], page: page + 1) %>">next 👉</a>
+    </li>
+  <% end %>
+</ol>

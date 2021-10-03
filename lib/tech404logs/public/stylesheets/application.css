@@ -183,3 +183,11 @@ form.search {
   font-size: .9375rem;
   margin-bottom: 0;
 }
+
+.content .pagination {
+  list-style: none;
+}
+
+.content .pagination .pagination-item {
+  display: inline;
+}
