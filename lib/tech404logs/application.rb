@@ -65,7 +65,7 @@ module Tech404logs
           offset: (page - 1) * SEARCH_RESULTS_PER_PAGE
         )
 
-        @pages = @results_count / SEARCH_RESULTS_PER_PAGE
+        @pages = (@results_count.to_f / SEARCH_RESULTS_PER_PAGE).ceil
 
         @canonical_path = search_path(params[:q], page: page)
         erb :search
