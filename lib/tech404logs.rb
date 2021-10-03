@@ -6,7 +6,6 @@ require 'logger'
 require 'pg'
 require 'sequel'
 require 'sinatra/base'
-require 'skylight/sinatra'
 
 require 'tech404logs/helpers'
 require 'tech404logs/application'
@@ -54,8 +53,6 @@ module Tech404logs
   end
 
   def self.preboot
-    Skylight.start!(env: environment)
-
     DataMapper::Logger.new(STDOUT, :debug)
     DataMapper.setup(:default, ENV['DATABASE_URL'])
     DataMapper.finalize

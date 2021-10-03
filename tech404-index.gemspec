@@ -43,7 +43,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rake'
   spec.add_dependency 'sequel'
   spec.add_dependency 'sinatra'
-  spec.add_dependency 'skylight'
 
   spec.add_development_dependency 'byebug'
   spec.add_development_dependency 'bundler'
