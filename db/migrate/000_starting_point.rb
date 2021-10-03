@@ -1,3 +1,6 @@
+# Prior to this migration, databases were created and auto-upgraded by
+# datamapper
+STARTING_POINT = <<-SQL
 --
 -- PostgreSQL database dump
 --
@@ -21,10 +24,10 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- Name: channels; Type: TABLE; Schema: public; Owner: -
+-- Name: tech404_index_channels; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE public.channels (
+CREATE TABLE public.tech404_index_channels (
     id character varying(50) NOT NULL,
     name character varying(50),
     creator_id character varying(50),
@@ -33,24 +36,15 @@ CREATE TABLE public.channels (
 
 
 --
--- Name: messages; Type: TABLE; Schema: public; Owner: -
+-- Name: tech404_index_messages; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE public.messages (
+CREATE TABLE public.tech404_index_messages (
     id integer NOT NULL,
     channel_id character varying(50),
     user_id character varying(50),
     text text,
     "timestamp" timestamp without time zone
-);
-
-
---
--- Name: migration_info; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.migration_info (
-    migration_name character varying(255)
 );
 
 
@@ -71,14 +65,14 @@ CREATE SEQUENCE public.tech404_index_messages_id_seq
 -- Name: tech404_index_messages_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE public.tech404_index_messages_id_seq OWNED BY public.messages.id;
+ALTER SEQUENCE public.tech404_index_messages_id_seq OWNED BY public.tech404_index_messages.id;
 
 
 --
--- Name: users; Type: TABLE; Schema: public; Owner: -
+-- Name: tech404_index_users; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE public.users (
+CREATE TABLE public.tech404_index_users (
     id character varying(50) NOT NULL,
     name character varying(50),
     real_name character varying(50),
@@ -87,52 +81,50 @@ CREATE TABLE public.users (
 
 
 --
--- Name: messages id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: tech404_index_messages id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.messages ALTER COLUMN id SET DEFAULT nextval('public.tech404_index_messages_id_seq'::regclass);
-
-
---
--- Name: migration_info migration_info_migration_name_key; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.migration_info
-    ADD CONSTRAINT migration_info_migration_name_key UNIQUE (migration_name);
+ALTER TABLE ONLY public.tech404_index_messages ALTER COLUMN id SET DEFAULT nextval('public.tech404_index_messages_id_seq'::regclass);
 
 
 --
--- Name: channels tech404_index_channels_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: tech404_index_channels tech404_index_channels_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.channels
+ALTER TABLE ONLY public.tech404_index_channels
     ADD CONSTRAINT tech404_index_channels_pkey PRIMARY KEY (id);
 
 
 --
--- Name: messages tech404_index_messages_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: tech404_index_messages tech404_index_messages_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.messages
+ALTER TABLE ONLY public.tech404_index_messages
     ADD CONSTRAINT tech404_index_messages_pkey PRIMARY KEY (id);
 
 
 --
--- Name: users tech404_index_users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: tech404_index_users tech404_index_users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.users
+ALTER TABLE ONLY public.tech404_index_users
     ADD CONSTRAINT tech404_index_users_pkey PRIMARY KEY (id);
-
-
---
--- Name: messages_channel_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX messages_channel_id ON public.messages USING btree (channel_id);
 
 
 --
 -- PostgreSQL database dump complete
 --
 
+SQL
+
+migration 0, :starting_point do
+  up do
+    execute STARTING_POINT
+  end
+
+  down do
+    drop_table :tech404logs_channels
+    drop table :tech404logs_messages
+    drop_table :tech404logs_users
+  end
+end
