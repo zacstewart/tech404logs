@@ -1,5 +1,5 @@
 module Tech404logs
-  class SearchableMessage < Message
+  class SearchableMessage
     include DataMapper::Resource
     storage_names[:default] = 'searchable_messages'
 
