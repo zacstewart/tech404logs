@@ -18,7 +18,6 @@ PATH
       rake
       sequel
       sinatra
-      skylight
 
 GEM
   remote: https://rubygems.org/
@@ -127,10 +126,6 @@ GEM
       rack (~> 2.0)
       rack-protection (= 2.0.5)
       tilt (~> 2.0)
-    skylight (4.1.2)
-      skylight-core (= 4.1.2)
-    skylight-core (4.1.2)
-      activesupport (>= 4.2.0)
     stringex (1.5.1)
     thread_safe (0.3.6)
     tilt (2.0.9)
