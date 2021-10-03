@@ -39,9 +39,13 @@
     </li>
   <% end %>
 
-  <% (1..@pages).each do |page| %>
+  <% (1..@pages).each do |p| %>
     <li class="pagination-item">
-      <a href="<%= search_path(params[:q], page: page) %>"><%= page %></a>
+      <% if p == page %>
+        <%= p %>
+      <% else %>
+        <a href="<%= search_path(params[:q], page: p) %>"><%= p %></a>
+      <% end %>
     </li>
   <% end %>
 
