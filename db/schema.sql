@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 13.4
--- Dumped by pg_dump version 13.4
+-- Dumped from database version 13.6
+-- Dumped by pg_dump version 13.6
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -55,6 +55,39 @@ CREATE TABLE public.migration_info (
 
 
 --
+-- Name: users; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.users (
+    id character varying(50) NOT NULL,
+    name character varying(50),
+    real_name character varying(50),
+    image character varying(255)
+);
+
+
+--
+-- Name: searchable_messages; Type: MATERIALIZED VIEW; Schema: public; Owner: -
+--
+
+CREATE MATERIALIZED VIEW public.searchable_messages AS
+ SELECT messages.id,
+    messages.channel_id,
+    messages.user_id,
+    messages.text,
+    messages."timestamp",
+    channels.name AS channel_name,
+    users.image AS user_image,
+    users.real_name AS user_real_name,
+    users.name AS user_name,
+    to_tsvector(((((((messages.text || ' '::text) || (channels.name)::text) || ' '::text) || (users.real_name)::text) || ' '::text) || (users.name)::text)) AS tsv
+   FROM ((public.messages
+     JOIN public.users ON (((messages.user_id)::text = (users.id)::text)))
+     JOIN public.channels ON (((messages.channel_id)::text = (channels.id)::text)))
+  WITH NO DATA;
+
+
+--
 -- Name: tech404_index_messages_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -72,18 +105,6 @@ CREATE SEQUENCE public.tech404_index_messages_id_seq
 --
 
 ALTER SEQUENCE public.tech404_index_messages_id_seq OWNED BY public.messages.id;
-
-
---
--- Name: users; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.users (
-    id character varying(50) NOT NULL,
-    name character varying(50),
-    real_name character varying(50),
-    image character varying(255)
-);
 
 
 --
@@ -130,6 +151,13 @@ ALTER TABLE ONLY public.users
 --
 
 CREATE INDEX messages_channel_id ON public.messages USING btree (channel_id);
+
+
+--
+-- Name: searchable_messages_tsv; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX searchable_messages_tsv ON public.searchable_messages USING gin (tsv);
 
 
 --
