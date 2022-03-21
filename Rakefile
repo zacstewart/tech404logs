@@ -69,7 +69,8 @@ namespace :db do
 
   namespace :schema do
     task :dump do
-      sh "pg_dump -sO #{ENV['DATABASE_URL']} > db/schema.sql"
+      sh "pg_dump --schema-only --no-owner #{ENV['DATABASE_URL']} > db/schema.sql"
+      sh "pg_dump --table migration_info --data-only --no-owner #{ENV['DATABASE_URL']} >> db/schema.sql"
     end
 
     task load: 'db:create' do

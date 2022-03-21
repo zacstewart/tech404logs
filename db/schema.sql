@@ -164,3 +164,39 @@ CREATE INDEX searchable_messages_tsv ON public.searchable_messages USING gin (ts
 -- PostgreSQL database dump complete
 --
 
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 13.6
+-- Dumped by pg_dump version 13.6
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Data for Name: migration_info; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.migration_info (migration_name) FROM stdin;
+starting_point
+rename_channels_table
+rename_messages_table
+rename_users_table
+add_index_to_messages
+add_fulltext_index_to_messages
+\.
+
+
+--
+-- PostgreSQL database dump complete
+--
+
