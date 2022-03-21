@@ -62,7 +62,8 @@ CREATE TABLE public.users (
     id character varying(50) NOT NULL,
     name character varying(50),
     real_name character varying(50),
-    image character varying(255)
+    image character varying(255),
+    opted_out boolean DEFAULT false NOT NULL
 );
 
 
@@ -193,6 +194,7 @@ rename_messages_table
 rename_users_table
 add_index_to_messages
 add_fulltext_index_to_messages
+add_opted_out_to_users
 \.
 
 
