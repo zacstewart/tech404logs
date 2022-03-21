@@ -13,7 +13,7 @@ task :default => :test
 namespace :env do
   task :test do
     ENV['RACK_ENV'] = 'test'
-    ENV['DATABASE_URL'] = ENV['TEST_DATABASE_URL']
+    ENV['DATABASE_URL'] = ENV.fetch('TEST_DATABASE_URL')
   end
 end
 
