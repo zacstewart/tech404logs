@@ -9,6 +9,7 @@ module Tech404logs
     property :name, String
     property :real_name, String
     property :image, String, length: 255
+    property :opted_out, Boolean
 
     def self.create_or_update(user)
       first_or_new(id: user.fetch('id')).tap do |record|
@@ -19,6 +20,8 @@ module Tech404logs
     end
 
     def self.store(user_or_id)
+      warn '[DEPRECATION] User.store is deprecated. All user updates should go through UserHandler'
+
       case user_or_id
       when Hash
         create_or_update(user_or_id)

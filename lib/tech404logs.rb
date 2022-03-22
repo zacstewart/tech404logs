@@ -16,6 +16,7 @@ require 'tech404logs/channel_mention_filter'
 require 'tech404logs/configuration'
 require 'tech404logs/connection'
 require 'tech404logs/event_handler'
+require 'tech404logs/fake_cache'
 require 'tech404logs/handlers'
 require 'tech404logs/handlers/user_handler'
 require 'tech404logs/handlers/message_handler'
@@ -30,7 +31,11 @@ require 'tech404logs/worker_fork'
 
 module Tech404logs
   def self.cache
-    @cache ||= Cache.new
+    @cache ||= if production?
+      Cache.new
+    else
+      FakeCache.new
+    end
   end
 
   def self.configuration

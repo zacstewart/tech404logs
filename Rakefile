@@ -1,6 +1,7 @@
-require "bundler/gem_tasks"
-require "rake/testtask"
+require 'bundler/gem_tasks'
+require 'rake/testtask'
 require 'tech404logs'
+require 'tech404logs/tasks/opt_out_user'
 
 Rake::TestTask.new(test: ['env:test', 'db:schema:load', :environment]) do |t|
   t.libs << 'test'
@@ -13,7 +14,7 @@ task :default => :test
 namespace :env do
   task :test do
     ENV['RACK_ENV'] = 'test'
-    ENV['DATABASE_URL'] = ENV['TEST_DATABASE_URL']
+    ENV['DATABASE_URL'] = ENV.fetch('TEST_DATABASE_URL')
   end
 end
 
@@ -23,6 +24,13 @@ end
 
 task :reindex => [:environment] do
   Tech404logs.db.execute 'REFRESH MATERIALIZED VIEW searchable_messages'
+end
+
+namespace :user do
+  desc 'Set a users opted_out flag to true and stop recording messages from them'
+  task :optout => [:environment] do
+    Tech404logs::Tasks::OptOutUser.run
+  end
 end
 
 namespace :db do
@@ -69,7 +77,8 @@ namespace :db do
 
   namespace :schema do
     task :dump do
-      sh "pg_dump -sO #{ENV['DATABASE_URL']} > db/schema.sql"
+      sh "pg_dump --schema-only --no-owner #{ENV['DATABASE_URL']} > db/schema.sql"
+      sh "pg_dump --table migration_info --data-only --no-owner #{ENV['DATABASE_URL']} >> db/schema.sql"
     end
 
     task load: 'db:create' do

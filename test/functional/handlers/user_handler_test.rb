@@ -2,6 +2,7 @@ require 'test_helper'
 
 describe Handlers::UserHandler do
   subject { Handlers::UserHandler.new }
+  let(:users) { Sequel::Model.db[:users] }
 
   describe '#handle' do
     let(:my_name) { 'Zac' }
@@ -16,10 +17,10 @@ describe Handlers::UserHandler do
     } }
 
     describe 'when the user has never been seen before' do
-      it 'inserts a new User and returns its id' do
+      it 'inserts a new User and returns it' do
         returned_id = subject.handle(event)
-        User.first(id: id).name.must_equal(my_name)
-        returned_id.must_equal(id)
+        _(users.where(id: id).first[:name]).must_equal(my_name)
+        _(returned_id).must_equal(id)
       end
     end
 
@@ -34,10 +35,23 @@ describe Handlers::UserHandler do
       end
 
       it 'updates the existing User' do
-        User.first(id: id).name.must_equal('Caz')
+        _(users.where(id: id).first[:name]).must_equal('Caz')
 
         subject.handle(event)
-        User.first(id: id).name.must_equal(my_name)
+        _(users.where(id: id).first[:name]).must_equal(my_name)
+      end
+    end
+
+    describe 'when the user has been opted out' do
+      let(:id) { 'UOPTOUT' }
+
+      before do
+        users.insert(id: 'UOPTOUT', opted_out: true)
+      end
+
+      it 'does not update the User' do
+        subject.handle(event)
+        _(users.where(id: id).first[:name]).must_be_nil
       end
     end
 
@@ -46,11 +60,10 @@ describe Handlers::UserHandler do
 
       it 'touches the User record and returns its id' do
         returned_id = subject.handle(event)
-        user = User.first(id: id)
-        user.id.must_equal(id)
-        user.name.must_equal(my_name)
         returned_id.must_equal(id)
+        _(users.where(id: id).count).must_equal(1)
       end
     end
+
   end
 end
