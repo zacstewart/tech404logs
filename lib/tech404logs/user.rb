@@ -9,6 +9,7 @@ module Tech404logs
     property :name, String
     property :real_name, String
     property :image, String, length: 255
+    property :opted_out, Boolean
 
     def self.create_or_update(user)
       first_or_new(id: user.fetch('id')).tap do |record|
