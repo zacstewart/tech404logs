@@ -26,12 +26,12 @@ module Tech404logs
       attr_reader :db, :table, :user_handler
 
       def store(message)
-        db.transaction do 
+        db.transaction do
           table.insert(
             channel_id: message.fetch('channel'),
             user_id: user_handler.handle(message.fetch('user')),
             text: message.fetch('text'),
-            timestamp: Time.at(Float(message.fetch('ts')))
+            timestamp: Time.at(Float(message.fetch('ts')), in: 'utc')
           )
         end
       end
