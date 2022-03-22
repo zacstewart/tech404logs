@@ -20,6 +20,8 @@ module Tech404logs
     end
 
     def self.store(user_or_id)
+      warn '[DEPRECATION] User.store is deprecated. All user updates should go through UserHandler'
+
       case user_or_id
       when Hash
         create_or_update(user_or_id)
