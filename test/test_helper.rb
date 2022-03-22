@@ -9,14 +9,17 @@ require 'minitest/spec'
 require 'mocha/mini_test'
 require 'minitest/autorun'
 require 'database_cleaner'
+require 'database_cleaner-sequel'
+
+DatabaseCleaner[:sequel].db = Tech404logs.db
 
 class FunctionalSpec < MiniTest::Spec
   before do
-    DatabaseCleaner.start
+    DatabaseCleaner[:sequel].start
   end
 
   after do
-    DatabaseCleaner.clean
+    DatabaseCleaner[:sequel].clean
   end
 end
 

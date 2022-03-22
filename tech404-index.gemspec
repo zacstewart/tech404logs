@@ -47,6 +47,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'byebug'
   spec.add_development_dependency 'bundler'
   spec.add_development_dependency 'database_cleaner'
+  spec.add_development_dependency 'database_cleaner-sequel'
   spec.add_development_dependency 'minitest'
   spec.add_development_dependency 'mocha'
   spec.add_development_dependency 'simplecov'

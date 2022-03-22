@@ -47,7 +47,11 @@ GEM
       dm-validations (~> 1.2.0)
     data_objects (0.10.17)
       addressable (~> 2.1)
-    database_cleaner (1.7.0)
+    database_cleaner (1.8.5)
+    database_cleaner-core (2.0.1)
+    database_cleaner-sequel (2.0.2)
+      database_cleaner-core (~> 2.0.0)
+      sequel
     dm-aggregates (1.2.0)
       dm-core (~> 1.2.0)
     dm-constraints (1.2.0)
@@ -143,6 +147,7 @@ DEPENDENCIES
   bundler
   byebug
   database_cleaner
+  database_cleaner-sequel
   minitest
   mocha
   simplecov
