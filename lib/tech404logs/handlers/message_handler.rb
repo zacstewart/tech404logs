@@ -2,6 +2,8 @@ module Tech404logs
   module Handlers
     class MessageHandler
 
+      REDACTED = '[redacted]'
+
       def initialize
         @db = Sequel::Model.db
         @table = Sequel::Model.db[:messages]
@@ -27,10 +29,17 @@ module Tech404logs
 
       def store(message)
         db.transaction do
+          user_id = message.fetch('user')
+          text = if user_handler.opted_out?(user_id)
+            REDACTED
+          else
+            message.fetch('text')
+          end
+
           table.insert(
             channel_id: message.fetch('channel'),
-            user_id: user_handler.handle(message.fetch('user')),
-            text: message.fetch('text'),
+            user_id: user_handler.handle(user_id),
+            text: text,
             timestamp: Time.at(Float(message.fetch('ts')), in: 'utc')
           )
         end
