@@ -1,5 +1,5 @@
-require "bundler/gem_tasks"
-require "rake/testtask"
+require 'bundler/gem_tasks'
+require 'rake/testtask'
 require 'tech404logs'
 
 Rake::TestTask.new(test: ['env:test', 'db:schema:load', :environment]) do |t|
