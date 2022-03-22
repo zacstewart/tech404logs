@@ -40,11 +40,12 @@ describe Handlers::MessageHandler do
 
     describe 'when the User has opted-out' do
       let(:user_id) { 'UOPTOUT' }
+
       before do
         users.insert(id: user_id, opted_out: true)
       end
 
-      it 'stores a message with the text blanked out' do
+      it 'stores a message with the text redacted' do
         returned_id = subject.handle(event)
 
         message = messages.where(id: returned_id).first
