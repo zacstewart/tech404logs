@@ -7,7 +7,7 @@ module Tech404logs
         @table = Sequel::Model.db[:users]
       end
 
-      # Returns a record of the upserted User
+      # Returns the id of the upserted User
       def handle(event_or_id)
         case event_or_id
         when Hash
