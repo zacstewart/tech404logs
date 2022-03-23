@@ -1,7 +1,7 @@
 ---
 name: Data removal request
 about: Opt out of chat archives or remove certain messages from the archive
-title: ''
+title: Data removal request for USERNAME
 labels: ''
 assignees: ''
 
@@ -10,6 +10,7 @@ assignees: ''
 Please process the following data removal request. 
 
 My Slack user id is (it looks like U03H0B61B): 
+my Slack username is:
 
 Check all that apply with [x]:
 
