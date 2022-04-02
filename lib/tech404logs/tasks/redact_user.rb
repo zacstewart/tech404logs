@@ -7,6 +7,7 @@ module Tech404logs
 
       DELETED = '[deleted]'
       DELETED_IMAGE = '/deleted-user.png'
+      REDACTED = '[redacted]'
 
       def self.run
         new.run
@@ -24,6 +25,7 @@ module Tech404logs
 
         db.transaction do
           blank_out_user_profile(user_id)
+          redact_users_messages(user_id)
         end
       end
 
@@ -36,6 +38,12 @@ module Tech404logs
           name: DELETED,
           real_name: DELETED,
           image: DELETED_IMAGE
+        )
+      end
+
+      def redact_users_messages(user_id)
+        messages.where(user_id: user_id).update(
+          text: REDACTED
         )
       end
 
