@@ -30,6 +30,11 @@ namespace :user do
   task :optout => [:environment] do
     Tech404logs::Tasks::OptOutUser.run
   end
+
+  desc 'Redact user profile and historic messages'
+  task :redact => [:environment] do
+    Tech404logs::Tasks::RedactUser.run
+  end
 end
 
 namespace :db do
