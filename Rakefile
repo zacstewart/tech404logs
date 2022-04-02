@@ -1,7 +1,6 @@
 require 'bundler/gem_tasks'
 require 'rake/testtask'
 require 'tech404logs'
-require 'tech404logs/tasks/opt_out_user'
 
 Rake::TestTask.new(test: ['env:test', 'db:schema:load', :environment]) do |t|
   t.libs << 'test'
