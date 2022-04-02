@@ -1,7 +1,6 @@
 require 'bundler/gem_tasks'
 require 'rake/testtask'
 require 'tech404logs'
-require 'tech404logs/tasks/opt_out_user'
 
 Rake::TestTask.new(test: ['env:test', 'db:schema:load', :environment]) do |t|
   t.libs << 'test'
@@ -30,6 +29,11 @@ namespace :user do
   desc 'Set a users opted_out flag to true and stop recording messages from them'
   task :optout => [:environment] do
     Tech404logs::Tasks::OptOutUser.run
+  end
+
+  desc 'Redact user profile and historic messages'
+  task :redact => [:environment] do
+    Tech404logs::Tasks::RedactUser.run
   end
 end
 
