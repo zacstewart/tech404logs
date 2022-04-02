@@ -3,7 +3,7 @@ require 'pp'
 
 module Tech404logs
   module Tasks
-    class RedactUser
+    class RedactUser < Task
 
       DELETED = '[deleted]'
       DELETED_IMAGE = '/deleted-user.png'
@@ -14,7 +14,7 @@ module Tech404logs
       end
 
       def initialize
-        @db = Sequel::Model.db
+        super
         @users = Sequel::Model.db[:users]
         @messages = Sequel::Model.db[:messages]
       end
@@ -22,10 +22,19 @@ module Tech404logs
       def run
         puts "Please enter the user's ID (It looks like U03H0B61B)"
         user_id = Readline.readline("> ").strip
-
         db.transaction do
-          blank_out_user_profile(user_id)
-          redact_users_messages(user_id)
+          if user = find_user(user_id)
+            pp user
+            message_count = messages.where(user_id: user_id).count
+            puts "#{message_count} messages"
+
+            confirm('Are you sure you want to redact this user?') do
+              blank_out_user_profile(user_id)
+              redact_users_messages(user_id)
+            end
+          else
+            puts "That user doesn't exist."
+          end
         end
       end
 

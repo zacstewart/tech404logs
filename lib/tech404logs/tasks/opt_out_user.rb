@@ -3,13 +3,10 @@ require 'pp'
 
 module Tech404logs
   module Tasks
-    class OptOutUser
-      def self.run
-        new.run
-      end
+    class OptOutUser < Task
 
       def initialize
-        @db = Sequel::Model.db
+        super
         @users = Sequel::Model.db[:users]
       end
 
@@ -38,11 +35,6 @@ module Tech404logs
 
       attr_reader :db, :users
 
-      def confirm(prompt)
-        confirmation = Readline.readline("#{prompt} [Y/n] ").strip
-        yield if confirmation =~ /\A[yY]\Z/
-      end
-
       def create_opted_out_stub_user(user_id)
         users.insert_conflict(target: :id, update: {
           opted_out: Sequel[:excluded][:opted_out],
@@ -50,10 +42,6 @@ module Tech404logs
           id: user_id,
           opted_out: true
         )
-      end
-
-      def find_user(user_id)
-        users.where(id: user_id).first
       end
 
       def opt_out_user!(user_id)
