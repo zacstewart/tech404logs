@@ -8,7 +8,7 @@ PATH
       dm-migrations
       dm-postgres-adapter
       faraday
-      faye-websocket (~> 0.10.0)
+      faye-websocket (>= 0.10, < 0.12)
       le
       multi_json (~> 1.11.2)
       newrelic_rpm
@@ -93,7 +93,7 @@ GEM
     faraday (0.15.4)
       multipart-post (>= 1.2, < 3)
     fastercsv (1.5.5)
-    faye-websocket (0.10.9)
+    faye-websocket (0.11.1)
       eventmachine (>= 0.12.0)
       websocket-driver (>= 0.5.1)
     i18n (1.6.0)
@@ -136,9 +136,9 @@ GEM
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
     uuidtools (2.1.5)
-    websocket-driver (0.7.1)
+    websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
-    websocket-extensions (0.1.4)
+    websocket-extensions (0.1.5)
 
 PLATFORMS
   ruby
